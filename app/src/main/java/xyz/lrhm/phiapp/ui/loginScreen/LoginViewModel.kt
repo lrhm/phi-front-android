@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import xyz.lrhm.phiapp.core.data.model.ResultOf
 import xyz.lrhm.phiapp.core.data.model.succeeded
 import xyz.lrhm.phiapp.core.data.source.AppRepository
@@ -20,10 +21,12 @@ class LoginViewModel @Inject constructor(val appRepository: AppRepository) : Vie
         viewModelScope.launch {
           val res=  appRepository.doLogin(username, password)
 
-            Log.d("TAG", "login is ${res}")
+            Timber.d( "login is ${res}")
             if( res is ResultOf.Success)
             {
-              Log.d("TAG", "login is ${res.data}")
+                Timber.d( "login is ${res.data}")
+
+                val user = appRepository.remoteDataSource.getUser()
             }
         }
     }
