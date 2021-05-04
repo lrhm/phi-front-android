@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id("com.apollographql.apollo").version("$graphQLVersion")
+    id "org.jetbrains.kotlin.kapt"
 }
 
 android {
@@ -50,6 +52,14 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation("com.apollographql.apollo:apollo-runtime:$graphQLVersion")
+    // optional: if you want to use the normalized cache
+    implementation("com.apollographql.apollo:apollo-normalized-cache-sqlite:$graphQLVersion")
+    // optional: for coroutines support
+    implementation("com.apollographql.apollo:apollo-coroutines-support:$graphQLVersion")
+
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
