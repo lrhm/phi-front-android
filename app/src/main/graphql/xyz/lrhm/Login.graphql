@@ -1,0 +1,5 @@
+  query LoginQuery($loginUsername: String!, $loginPassword: String!) {
+    tokenPayload(username: $loginUsername, password: $loginPassword) {
+      token
+    }
+  }

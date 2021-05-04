@@ -12,8 +12,14 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.coroutines.await
+import com.apollographql.apollo.exception.ApolloException
+import kotlinx.coroutines.launch
+import xyz.lrhm.LoginQuery
 import xyz.lrhm.phiapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
@@ -45,7 +51,32 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener(this)
-    }
+
+
+        val apolloClient = ApolloClient.builder()
+            .serverUrl("https://your.domain/graphql/endpoint")
+            .build()
+
+// in your coroutine scope, call `ApolloClient.query(...).toDeferred().await()`
+        lifecycleScope.launch {
+            val response = try {
+                apolloClient.query(LoginQuery("","")).await()
+            } catch (e: ApolloException) {
+                // handle protocol errors
+                return@launch
+            }
+
+            val launch = response.data?.tokenPayload
+            if (launch == null || response.hasErrors()) {
+                // handle application errors
+                return@launch
+            }
+
+        }
+
+
+
+        }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

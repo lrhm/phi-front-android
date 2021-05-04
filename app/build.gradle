@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id("com.apollographql.apollo").version("$graphQLVersion")
-    id "org.jetbrains.kotlin.kapt"
+    id "kotlin-kapt"
 }
 
 android {
@@ -36,6 +36,12 @@ android {
     buildFeatures {
         dataBinding true
     }
+
+}
+
+apollo {
+    // instruct the compiler to generate Kotlin models
+    generateKotlinModels.set(true)
 }
 
 dependencies {
@@ -52,6 +58,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    kapt "com.android.databinding:compiler:$gradleVersion"
 
     implementation("com.apollographql.apollo:apollo-runtime:$graphQLVersion")
     // optional: if you want to use the normalized cache
