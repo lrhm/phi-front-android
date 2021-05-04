@@ -6,6 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import xyz.lrhm.phiapp.R
 
 class SplashFragment : Fragment() {
@@ -20,6 +24,7 @@ class SplashFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.splash_fragment, container, false)
     }
 
@@ -27,6 +32,12 @@ class SplashFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SplashViewModel::class.java)
         // TODO: Use the ViewModel
+
+
+        lifecycleScope.launch {
+            delay(500)
+            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+        }
     }
 
 }

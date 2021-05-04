@@ -5,14 +5,17 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 class ApolloModule {
 
     @Provides
+    @Singleton
     fun providesApolloClient() = ApolloClient.builder()
-        .serverUrl("http://localhost:4000")
+        .serverUrl("http://192.168.2.5:4000")
         .build()
 
 

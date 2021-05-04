@@ -18,10 +18,12 @@ import androidx.navigation.NavDestination
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.await
 import com.apollographql.apollo.exception.ApolloException
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import xyz.lrhm.LoginQuery
 import xyz.lrhm.phiapp.databinding.ActivityMainBinding
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
