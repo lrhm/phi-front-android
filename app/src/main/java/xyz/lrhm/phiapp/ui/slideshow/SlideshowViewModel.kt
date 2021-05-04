@@ -1,4 +1,4 @@
-package com.example.phiapp.ui.slideshow
+package xyz.lrhm.phiapp.ui.slideshow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

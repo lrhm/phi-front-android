@@ -1,4 +1,4 @@
-package com.example.phiapp.ui.slideshow
+package xyz.lrhm.phiapp.ui.slideshow
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.phiapp.R
+import xyz.lrhm.phiapp.R
 
 class SlideshowFragment : Fragment() {
 

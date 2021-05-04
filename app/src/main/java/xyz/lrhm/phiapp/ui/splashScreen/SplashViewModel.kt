@@ -1,4 +1,4 @@
-package com.example.phiapp.ui.splashScreen
+package xyz.lrhm.phiapp.ui.splashScreen
 
 import androidx.lifecycle.ViewModel
 

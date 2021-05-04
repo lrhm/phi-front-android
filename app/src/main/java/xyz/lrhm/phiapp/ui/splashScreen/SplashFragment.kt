@@ -1,4 +1,4 @@
-package com.example.phiapp.ui.splashScreen
+package xyz.lrhm.phiapp.ui.splashScreen
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.phiapp.R
+import xyz.lrhm.phiapp.R
 
 class SplashFragment : Fragment() {
 

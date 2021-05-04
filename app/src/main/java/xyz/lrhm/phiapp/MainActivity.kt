@@ -1,10 +1,8 @@
-package com.example.phiapp
+package xyz.lrhm.phiapp
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,11 +11,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import com.example.phiapp.databinding.ActivityMainBinding
+import xyz.lrhm.phiapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
@@ -67,7 +64,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         arguments: Bundle?
     ) {
 
-        if(destination.id == R.id.splashFragment){
+        if(destination.id == R.id.splashFragment ){
 
             binding.mainLayout.appBar.visibility = View.GONE
         } else {
