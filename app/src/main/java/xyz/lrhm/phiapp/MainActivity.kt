@@ -18,8 +18,10 @@ import androidx.navigation.NavDestination
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.await
 import com.apollographql.apollo.exception.ApolloException
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import xyz.lrhm.LoginQuery
 import xyz.lrhm.phiapp.databinding.ActivityMainBinding
 
@@ -55,25 +57,19 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         navController.addOnDestinationChangedListener(this)
 
 
-        val apolloClient = ApolloClient.builder()
-            .serverUrl("https://your.domain/graphql/endpoint")
-            .build()
 
-// in your coroutine scope, call `ApolloClient.query(...).toDeferred().await()`
-        lifecycleScope.launch {
-            val response = try {
-                apolloClient.query(LoginQuery("","")).await()
-            } catch (e: ApolloException) {
-                // handle protocol errors
-                return@launch
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.navBottomEducationalItem -> {
+                    Timber.d("clicked education")
+                    true
+                }
+                R.id.navBottomScheduleItem -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+                else -> false
             }
-
-            val launch = response.data?.tokenPayload
-            if (launch == null || response.hasErrors()) {
-                // handle application errors
-                return@launch
-            }
-
         }
 
 
@@ -102,6 +98,13 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             binding.mainLayout.appBar.visibility = View.GONE
         } else {
             binding.mainLayout.appBar.visibility = View.VISIBLE
+
+        }
+
+        if(destination.id == R.id.homeFragment) {
+            binding.mainLayout.mainContent.bottomNavigationView.visibility = View.VISIBLE
+        }else{
+            binding.mainLayout.mainContent.bottomNavigationView.visibility = View.GONE
 
         }
     }

@@ -28,19 +28,6 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
-        BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            when(item.itemId) {
-                R.id.navBottomEducationalItem -> {
-                    Timber.d("clicked education")
-                    true
-                }
-                R.id.navBottomScheduleItem -> {
-                    // Respond to navigation item 2 click
-                    true
-                }
-                else -> false
-            }
-        }
 
         return binding.root
     }
