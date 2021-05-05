@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        val toolbar= binding.mainLayout.toolbar
+        val toolbar = binding.mainLayout.toolbar
         setSupportActionBar(toolbar)
 
 //        val fab: FloatingActionButton = findViewById(R.id.fab)
@@ -49,8 +49,11 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.homeFragment), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.homeFragment
+            ), drawerLayout
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -59,7 +62,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
 
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            when(item.itemId) {
+            when (item.itemId) {
                 R.id.navBottomEducationalItem -> {
                     Timber.d("clicked education")
                     true
@@ -73,8 +76,8 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         }
 
 
+    }
 
-        }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -93,7 +96,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         arguments: Bundle?
     ) {
 
-        if(destination.id == R.id.splashFragment ){
+        if (destination.id == R.id.splashFragment) {
 
             binding.mainLayout.appBar.visibility = View.GONE
         } else {
@@ -101,9 +104,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         }
 
-        if(destination.id == R.id.homeFragment) {
+        if (destination.id == R.id.homeFragment) {
             binding.mainLayout.mainContent.bottomNavigationView.visibility = View.VISIBLE
-        }else{
+        } else {
             binding.mainLayout.mainContent.bottomNavigationView.visibility = View.GONE
 
         }
