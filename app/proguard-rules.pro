@@ -14,15 +14,8 @@
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
--keepattributes SourceFile,LineNumberTable
+#-keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-#-keepclasseswithmembernames class xyz.lrhm.GetUserQuery.User.*
-
-#-keep class  xyz.lrhm.GetUserQuery$* { *; }
-
-#-keep class com.xxx.A$* {
-#    *;
-#}
