@@ -6,34 +6,36 @@
     app:startDestination="@id/splashFragment">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="xyz.lrhm.phiapp.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="xyz.lrhm.phiapp.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="xyz.lrhm.phiapp.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-    <fragment
         android:id="@+id/splashFragment"
         android:name="xyz.lrhm.phiapp.ui.splashScreen.SplashFragment"
         android:label="splash_fragment"
         tools:layout="@layout/splash_fragment" >
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true"
+            />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true"
+            />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="xyz.lrhm.phiapp.ui.loginScreen.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="xyz.lrhm.phiapp.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        >
+
+
+    </fragment>
 </navigation>

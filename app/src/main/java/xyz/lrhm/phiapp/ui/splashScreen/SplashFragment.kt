@@ -52,6 +52,8 @@ class SplashFragment : Fragment() {
                     val user =                 appRepository.remoteDataSource.getUser()
 
                     Timber.d("user iz $user")
+                    findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+
                 }
             }
         }
