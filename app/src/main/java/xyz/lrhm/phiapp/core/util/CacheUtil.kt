@@ -2,7 +2,9 @@ package xyz.lrhm.phiapp.core.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.qualifiers.ApplicationContext
+import xyz.lrhm.GetUserQuery
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,6 +27,8 @@ class CacheUtil @Inject constructor(@ApplicationContext context: Context) {
 
       return  sharedPreferences.getString(TOKEN_KEY, "")!!
     }
+
+    val user = MutableLiveData<GetUserQuery.User>()
 
     companion object {
         const val TOKEN_KEY = "token"

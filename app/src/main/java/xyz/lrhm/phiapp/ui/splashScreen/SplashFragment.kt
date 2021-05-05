@@ -49,10 +49,10 @@ class SplashFragment : Fragment() {
             else{
                 lifecycleScope.launch {
 
-                    val user =                 appRepository.remoteDataSource.getUser()
+                    val user = appRepository.remoteDataSource.getUser()
 
                     Timber.d("user iz $user")
-                    findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                    findNavController().navigate(R.id.action_splashFragment_to_exerciseGalleryFragment)
 
                 }
             }

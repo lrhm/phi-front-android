@@ -2,11 +2,13 @@ package xyz.lrhm.phiapp.core.data.source.remoteDataSource
 
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.await
+import com.apollographql.apollo.coroutines.toFlow
 import com.apollographql.apollo.exception.ApolloException
 import com.apollographql.apollo.fetcher.ApolloResponseFetchers
 import com.apollographql.apollo.request.RequestHeaders
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -43,12 +45,28 @@ class RemoteDataSource @Inject constructor(
         return@withContext ResultOf.Success(launch)
     }
 
+    suspend fun watchUser() {
+
+        val token = cacheUtil.getToken()
+        apolloClient.query(GetUserQuery()).toBuilder()
+            .responseFetcher(ApolloResponseFetchers.CACHE_FIRST).requestHeaders(
+            RequestHeaders.builder().addHeader("Authorization", token).build()
+        ).build().watcher().toFlow().collect {
+
+
+            withContext(Dispatchers.Main) {
+                cacheUtil.user.value = it.data?.user
+            }
+        }
+    }
 
     suspend fun getUser() = withContext(Dispatchers.IO) {
 
+
         val token = cacheUtil.getToken()
         val response = try {
-            apolloClient.query(GetUserQuery()).toBuilder().responseFetcher(ApolloResponseFetchers.NETWORK_FIRST).requestHeaders(
+            apolloClient.query(GetUserQuery()).toBuilder()
+                .responseFetcher(ApolloResponseFetchers.NETWORK_FIRST).requestHeaders(
                 RequestHeaders.builder().addHeader("Authorization", token).build()
             ).build().await()
         } catch (e: ApolloException) {
@@ -59,6 +77,9 @@ class RemoteDataSource @Inject constructor(
 
         Timber.d("response is $response")
 
+        CoroutineScope(Dispatchers.IO).launch {
+            watchUser()
+        }
 
         val data = response.data?.user
 
@@ -66,6 +87,9 @@ class RemoteDataSource @Inject constructor(
             return@withContext ResultOf.Error(Exception("error"))
 
         }
+
+
+
         return@withContext ResultOf.Success(data)
 
     }

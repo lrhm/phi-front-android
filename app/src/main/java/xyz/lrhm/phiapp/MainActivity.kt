@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.homeFragment
+                R.id.exerciseGalleryFragment
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         }
 
-        if (destination.id == R.id.homeFragment) {
+        if (destination.id == R.id.exerciseGalleryFragment) {
             binding.mainLayout.mainContent.bottomNavigationView.visibility = View.VISIBLE
         } else {
             binding.mainLayout.mainContent.bottomNavigationView.visibility = View.GONE

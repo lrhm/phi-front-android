@@ -18,8 +18,8 @@
             app:popUpToInclusive="true"
             />
         <action
-            android:id="@+id/action_splashFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
+            android:id="@+id/action_splashFragment_to_exerciseGalleryFragment"
+            app:destination="@id/exerciseGalleryFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/mobile_navigation"
             app:popUpToInclusive="true"
@@ -31,9 +31,9 @@
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" />
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="xyz.lrhm.phiapp.ui.home.HomeFragment"
-        android:label="HomeFragment"
+        android:id="@+id/exerciseGalleryFragment"
+        android:name="xyz.lrhm.phiapp.ui.exercisesScreen.ExerciseGalleryFragment"
+        android:label="آموزش"
         >
 
 
