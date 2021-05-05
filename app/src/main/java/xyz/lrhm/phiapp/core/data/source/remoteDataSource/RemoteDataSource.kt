@@ -1,13 +1,18 @@
 package xyz.lrhm.phiapp.core.data.source.remoteDataSource
 
 import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.api.Operation
+import com.apollographql.apollo.api.internal.ResponseReader
+import com.apollographql.apollo.api.toJson
 import com.apollographql.apollo.coroutines.await
 import com.apollographql.apollo.exception.ApolloException
+import com.apollographql.apollo.fetcher.ResponseFetcher
 import com.apollographql.apollo.request.RequestHeaders
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okio.ByteString
 import timber.log.Timber
 import xyz.lrhm.GetUserQuery
 import xyz.lrhm.LoginQuery
@@ -65,6 +70,16 @@ class RemoteDataSource @Inject constructor(
             return@withContext ResultOf.Error(Exception("error"))
 
         }
+
+//        response.data!!.
+
+//        val parsed = GetUserQuery().parse(    ByteString.of(str.toByte())
+//        )
+
+//        parsed.data.user
+//        GetUserQuery.Data(ResponseReader.ObjectReader())
+//        cacheUtil.storeUserObject(data)
+
         return@withContext ResultOf.Success(data)
 
     }
