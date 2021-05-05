@@ -119,6 +119,37 @@ query GetUser {
           updatedAt
           createdAt
           date
+          assesments {
+            assesments {
+              tiredness {
+                enabled
+                name
+                title
+                value
+              }
+              dificulty {
+                enabled
+                name
+                title
+                value
+              }
+              shortnessOfBreath {
+                enabled
+                name
+                title
+                value
+              }
+              pain {
+                enabled
+                name
+                title
+                value
+              }
+            }
+            exerciseId
+            id
+          }
+
           parameters {
             parameters {
               sets {

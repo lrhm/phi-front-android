@@ -3,6 +3,7 @@ package xyz.lrhm.phiapp.core.data.source.remoteDataSource
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.await
 import com.apollographql.apollo.exception.ApolloException
+import com.apollographql.apollo.fetcher.ApolloResponseFetchers
 import com.apollographql.apollo.request.RequestHeaders
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -47,7 +48,7 @@ class RemoteDataSource @Inject constructor(
 
         val token = cacheUtil.getToken()
         val response = try {
-            apolloClient.query(GetUserQuery()).toBuilder().requestHeaders(
+            apolloClient.query(GetUserQuery()).toBuilder().responseFetcher(ApolloResponseFetchers.NETWORK_FIRST).requestHeaders(
                 RequestHeaders.builder().addHeader("Authorization", token).build()
             ).build().await()
         } catch (e: ApolloException) {
