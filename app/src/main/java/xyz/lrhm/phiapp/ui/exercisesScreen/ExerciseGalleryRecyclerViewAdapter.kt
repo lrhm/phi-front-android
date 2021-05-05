@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import xyz.lrhm.GetUserQuery
 import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.databinding.ExerciseItemBinding
@@ -35,6 +36,8 @@ class ExerciseGalleryRecyclerViewAdapter(
 
         holder.binding.textView.text = item.title
 
+        val url = item.pictures[0]!!.url.replace("localhost", "192.168.2.5")
+        Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)
 
     }
 

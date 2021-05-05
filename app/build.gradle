@@ -22,6 +22,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -67,7 +72,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
 
     kapt "com.android.databinding:compiler:$gradleVersion"
 
@@ -82,6 +87,9 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
 
 
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    // Skip this if you don't want to use integration libraries or configure Glide.
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
 //    implementation "androidx.security:security-crypto:1.0.0"
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
