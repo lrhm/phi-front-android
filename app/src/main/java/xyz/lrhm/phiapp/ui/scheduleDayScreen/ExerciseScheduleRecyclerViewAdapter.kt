@@ -6,20 +6,17 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import xyz.lrhm.GetUserQuery
 import xyz.lrhm.phiapp.databinding.ExerciseItemBinding
+import xyz.lrhm.phiapp.databinding.ScheduleExerciseItemBinding
 
 
-/**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
- * TODO: Replace the implementation with code for your data type.
- */
 class ExerciseScheduleRecyclerViewAdapter(
-    private val values: List<GetUserQuery.Exercise?>
+    private val values: List<GetUserQuery.Parameter>
 ) : RecyclerView.Adapter<ExerciseScheduleRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
-            ExerciseItemBinding.inflate(
+            ScheduleExerciseItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -31,17 +28,17 @@ class ExerciseScheduleRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]!!
 
-        holder.binding.textView.text = item.title
-
-
-        val url = item.pictures[0]!!.url.replace("localhost", "192.168.2.5")
-        Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)
+//        holder.binding.textView.text = item.title
+//
+//
+//        val url = item.pictures[0]!!.url.replace("localhost", "192.168.2.5")
+//        Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)
 
     }
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(val binding: ExerciseItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ScheduleExerciseItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 
 

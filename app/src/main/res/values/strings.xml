@@ -15,4 +15,6 @@
     <string name="educate">آموزش</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="show">مشاهده</string>
+    <string name="submitEvaluation">ثبت عملکرد</string>
 </resources>
