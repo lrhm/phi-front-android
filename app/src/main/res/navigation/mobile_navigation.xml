@@ -32,7 +32,7 @@
         tools:layout="@layout/login_fragment" />
     <fragment
         android:id="@+id/exerciseGalleryFragment"
-        android:name="xyz.lrhm.phiapp.ui.exercisesScreen.ExerciseGalleryFragment"
+        android:name="xyz.lrhm.phiapp.ui.exerciseGalleryScreen.ExerciseGalleryFragment"
         android:label="@string/educate"
         >
 

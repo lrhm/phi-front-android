@@ -1,14 +1,10 @@
-package xyz.lrhm.phiapp.ui.exercisesScreen
+package xyz.lrhm.phiapp.ui.scheduleDayScreen
 
-import android.content.res.ColorStateList
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import xyz.lrhm.GetUserQuery
-import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.databinding.ExerciseItemBinding
 
 
@@ -16,9 +12,9 @@ import xyz.lrhm.phiapp.databinding.ExerciseItemBinding
  * [RecyclerView.Adapter] that can display a [PlaceholderItem].
  * TODO: Replace the implementation with code for your data type.
  */
-class ExerciseGalleryRecyclerViewAdapter(
+class ExerciseScheduleRecyclerViewAdapter(
     private val values: List<GetUserQuery.Exercise?>
-) : RecyclerView.Adapter<ExerciseGalleryRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ExerciseScheduleRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 

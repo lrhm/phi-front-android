@@ -104,11 +104,11 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         }
 
-//        if (destination.id == R.id.exerciseGalleryFragment) {
-//            binding.mainLayout.mainContent.bottomNavigationView.visibility = View.VISIBLE
-//        } else {
-//            binding.mainLayout.mainContent.bottomNavigationView.visibility = View.GONE
-//
-//        }
+        if (destination.id == R.id.exerciseGalleryFragment) {
+            binding.mainLayout.bottomNavigationView.visibility = View.VISIBLE
+        } else {
+            binding.mainLayout.bottomNavigationView.visibility = View.GONE
+
+        }
     }
 }
