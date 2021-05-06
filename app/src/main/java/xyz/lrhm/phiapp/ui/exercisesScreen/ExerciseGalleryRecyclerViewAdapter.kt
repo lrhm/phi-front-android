@@ -1,5 +1,6 @@
 package xyz.lrhm.phiapp.ui.exercisesScreen
 
+import android.content.res.ColorStateList
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,7 @@ class ExerciseGalleryRecyclerViewAdapter(
         val item = values[position]!!
 
         holder.binding.textView.text = item.title
+
 
         val url = item.pictures[0]!!.url.replace("localhost", "192.168.2.5")
         Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)

@@ -12,8 +12,11 @@
 
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/recyclerView"
+          android:padding="10dp"
           android:layout_width="match_parent"
           android:layout_gravity="center_horizontal"
+          android:clipToPadding="false"
+          android:clipChildren="false"
           android:layout_height="wrap_content"/>
     </LinearLayout>
 </layout>

@@ -11,7 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <item name="android:layoutDirection">rtl</item>
+
         <!-- Customize your theme here. -->
     </style>
 
@@ -23,4 +23,11 @@
     <style name="Theme.PhiApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.PhiApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="dummy" parent="Theme.PhiApp">
+        <item name="android:layoutDirection">ltr</item>
+
+    </style>
+
+
 </resources>
