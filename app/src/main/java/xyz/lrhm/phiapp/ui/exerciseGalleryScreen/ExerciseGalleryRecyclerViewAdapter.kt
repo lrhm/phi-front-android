@@ -34,7 +34,7 @@ class ExerciseGalleryRecyclerViewAdapter(
         holder.binding.textView.text = item.title
 
 
-        val url = item.pictures[0]!!.url.replace("localhost", "192.168.2.5")
+        val url = item!!.pictures[0]!!.url.replace("localhost", "192.168.2.5")
         Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)
 
     }

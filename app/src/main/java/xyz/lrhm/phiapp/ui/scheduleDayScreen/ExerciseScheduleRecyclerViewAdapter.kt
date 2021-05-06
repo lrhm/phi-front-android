@@ -10,7 +10,9 @@ import xyz.lrhm.phiapp.databinding.ScheduleExerciseItemBinding
 
 
 class ExerciseScheduleRecyclerViewAdapter(
-    private val values: List<GetUserQuery.Parameter>
+    private val values: List<GetUserQuery.Parameter?>,
+    private val exercises: List<GetUserQuery.Exercise?>
+
 ) : RecyclerView.Adapter<ExerciseScheduleRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,11 +30,11 @@ class ExerciseScheduleRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]!!
 
-//        holder.binding.textView.text = item.title
+        holder.binding.titleTextView.text = item.title
 //
-//
-//        val url = item.pictures[0]!!.url.replace("localhost", "192.168.2.5")
-//        Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)
+        val exercise = exercises.find { it!!.id == item.exerciseId }
+        val url = exercise!!.pictures[0]!!.url.replace("localhost", "192.168.2.5")
+        Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)
 
     }
 

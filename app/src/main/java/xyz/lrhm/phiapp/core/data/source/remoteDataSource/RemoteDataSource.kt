@@ -96,6 +96,9 @@ class RemoteDataSource @Inject constructor(
 
         }
 
+        withContext(Dispatchers.Main) {
+            cachedUser = data!!
+        }
 
 
         return@withContext ResultOf.Success(data)

@@ -15,6 +15,8 @@ class ScheduleDayViewModel  @Inject constructor(val appRepository: AppRepository
 
     val selectedDate= MutableLiveData<PersianDate>(PersianDate())
 
+    fun getExercises() = appRepository.getCachedAPIRes().patient!!.schedule!!.exercises!!
+
     fun getDayForSelectedDate(): GetUserQuery.Day?{
 
         return appRepository.getScheduleForDay(selectedDate.value!!)
@@ -28,4 +30,7 @@ class ScheduleDayViewModel  @Inject constructor(val appRepository: AppRepository
 
     }
 
+    init {
+        setSelectedDate(PersianDate())
+    }
 }
