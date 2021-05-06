@@ -13,7 +13,7 @@
         tools:context=".ui.scheduleDayScreen.ScheduleDayFragment">
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/todayButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -21,31 +21,30 @@
             android:text="امروز"
             android:textColor="?attr/colorPrimary"
             android:textStyle="bold"
-            app:background="@drawable/rectange_bordered_white_bg"
+            android:background="@drawable/rectange_bordered_white_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.3" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/prevDayButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
+            android:drawableStart="@drawable/ic_baseline_arrow_forward"
             android:text="روز قبل"
             android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/todayButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/todayButton"
-            android:drawableEnd="@drawable/ic_baseline_arrow_back"
-       />
+            app:layout_constraintTop_toTopOf="@+id/todayButton" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nextDayButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
-            android:drawableStart="@drawable/ic_baseline_arrow_forward"
+            android:drawableEnd="@drawable/ic_baseline_arrow_back"
             android:text="روز بعد"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
