@@ -5,9 +5,13 @@
 
     </data>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
       <androidx.recyclerview.widget.RecyclerView
@@ -19,4 +23,6 @@
           android:clipChildren="false"
           android:layout_height="wrap_content"/>
     </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
 </layout>

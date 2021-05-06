@@ -33,7 +33,7 @@
     <fragment
         android:id="@+id/exerciseGalleryFragment"
         android:name="xyz.lrhm.phiapp.ui.exercisesScreen.ExerciseGalleryFragment"
-        android:label="آموزش"
+        android:label="@string/educate"
         >
 
 

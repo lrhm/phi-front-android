@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/rowsh_primary</item>
         <item name="colorPrimaryVariant">@color/rowsh_primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/rowsh_accent</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>

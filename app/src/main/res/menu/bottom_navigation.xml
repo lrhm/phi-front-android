@@ -4,10 +4,10 @@
         android:id="@+id/navBottomScheduleItem"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_assignment"
-        android:title="برنامه"/>
+        android:title="@string/therapySchedule"/>
     <item
         android:id="@+id/navBottomEducationalItem"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_educational"
-        android:title="آمورش"/>
+        android:title="@string/educate"/>
 </menu>

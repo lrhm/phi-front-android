@@ -79,11 +79,11 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        menuInflater.inflate(R.menu.main, menu)
+//        return true
+//    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
@@ -104,11 +104,11 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         }
 
-        if (destination.id == R.id.exerciseGalleryFragment) {
-            binding.mainLayout.mainContent.bottomNavigationView.visibility = View.VISIBLE
-        } else {
-            binding.mainLayout.mainContent.bottomNavigationView.visibility = View.GONE
-
-        }
+//        if (destination.id == R.id.exerciseGalleryFragment) {
+//            binding.mainLayout.mainContent.bottomNavigationView.visibility = View.VISIBLE
+//        } else {
+//            binding.mainLayout.mainContent.bottomNavigationView.visibility = View.GONE
+//
+//        }
     }
 }

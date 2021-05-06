@@ -46,7 +46,11 @@ class ExerciseGalleryFragment : Fragment() {
                     else -> GridLayoutManager(context, columnCount)
                 }
                 cacheUtil.user.observe(viewLifecycleOwner){
-                    adapter = ExerciseGalleryRecyclerViewAdapter(it!!.patient!!.schedule!!.exercises!!)
+                  val temp=  it!!.patient!!.schedule!!.exercises!!.toMutableList()
+                      temp.addAll(
+                        it!!.patient!!.schedule!!.exercises!!
+                    )
+                    adapter = ExerciseGalleryRecyclerViewAdapter(temp)
 
                 }
             }
