@@ -5,17 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import xyz.lrhm.phiapp.R
+import xyz.lrhm.phiapp.databinding.FragmentScheduleDayBinding
 
 class ScheduleDayFragment : Fragment() {
 
+//    val args: ScheduleDayFragmentArgs by navArgs()
+
+    lateinit var binding: FragmentScheduleDayBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule_day, container, false)
+        binding = FragmentScheduleDayBinding.inflate(inflater, container, false)
+
+
+
+        return binding.root
     }
 
 

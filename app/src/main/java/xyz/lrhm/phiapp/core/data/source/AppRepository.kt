@@ -17,6 +17,7 @@ class AppRepository @Inject constructor(
 
     suspend fun doLogin(username: String, password: String) = remoteDataSource.login(username, password)
 
+//    var user: GetUserQuery.User? = null
 
     fun isLoggedIn() = cacheUtil.getToken() != ""
 

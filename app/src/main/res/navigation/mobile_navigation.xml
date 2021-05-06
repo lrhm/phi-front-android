@@ -17,13 +17,6 @@
             app:popUpTo="@id/mobile_navigation"
             app:popUpToInclusive="true"
             />
-        <action
-            android:id="@+id/action_splashFragment_to_exerciseGalleryFragment"
-            app:destination="@id/exerciseGalleryFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/mobile_navigation"
-            app:popUpToInclusive="true"
-            />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -34,8 +27,21 @@
         android:id="@+id/exerciseGalleryFragment"
         android:name="xyz.lrhm.phiapp.ui.exerciseGalleryScreen.ExerciseGalleryFragment"
         android:label="@string/educate"
-        >
-
-
-    </fragment>
+        />
+    <fragment
+        android:id="@+id/scheduleDayFragment"
+        android:name="xyz.lrhm.phiapp.ui.scheduleDayScreen.ScheduleDayFragment"
+        android:label="@string/therapySchedule" />
+    <action
+        android:id="@+id/action_global_scheduleDayFragment2"
+        app:destination="@id/scheduleDayFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/mobile_navigation"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_exerciseGalleryFragment"
+        app:destination="@id/exerciseGalleryFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/scheduleDayFragment"
+        app:popUpToInclusive="false" />
 </navigation>

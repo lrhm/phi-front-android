@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.fragment.findNavController
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.await
 import com.apollographql.apollo.exception.ApolloException
@@ -51,7 +52,8 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.exerciseGalleryFragment
+                R.id.exerciseGalleryFragment,
+                R.id.scheduleDayFragment
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -59,21 +61,44 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         navController.addOnDestinationChangedListener(this)
 
-
-
-        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        binding.mainLayout.bottomNavigationView.setOnNavigationItemSelectedListener { item->
             when (item.itemId) {
                 R.id.navBottomEducationalItem -> {
                     Timber.d("clicked education")
+                    navController.navigate(R.id.action_global_exerciseGalleryFragment)
+
+
                     true
                 }
                 R.id.navBottomScheduleItem -> {
+                    navController.navigate(R.id.action_global_scheduleDayFragment2)
+
                     // Respond to navigation item 2 click
                     true
                 }
                 else -> false
             }
         }
+
+
+//        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+//            when (item.itemId) {
+//                R.id.navBottomEducationalItem -> {
+//                    Timber.d("clicked education")
+//                    navController.navigate(R.id.action_exerciseGalleryFragment_to_scheduleDayFragment)
+//
+//
+//                    true
+//                }
+//                R.id.navBottomScheduleItem -> {
+//                    navController.navigate(R.id.action_scheduleDayFragment_to_exerciseGalleryFragment)
+//
+//                    // Respond to navigation item 2 click
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
 
 
     }
@@ -104,7 +129,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         }
 
-        if (destination.id == R.id.exerciseGalleryFragment) {
+        if (destination.id == R.id.exerciseGalleryFragment ||
+                destination.id == R.id.scheduleDayFragment
+                ) {
             binding.mainLayout.bottomNavigationView.visibility = View.VISIBLE
         } else {
             binding.mainLayout.bottomNavigationView.visibility = View.GONE
