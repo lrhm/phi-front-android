@@ -21,7 +21,9 @@ class AppRepository @Inject constructor(
 
     fun isLoggedIn() = cacheUtil.getToken() != ""
 
-    fun getCachedAPIRes() = cacheUtil.user.value!!
+    fun getCachedAPIRes() = remoteDataSource.cachedUser!!
+
+    val user = remoteDataSource.user
 
     fun getTodaySchedule(): GetUserQuery.Day? {
 

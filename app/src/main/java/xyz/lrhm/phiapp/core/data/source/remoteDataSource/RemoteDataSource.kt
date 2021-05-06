@@ -1,5 +1,6 @@
 package xyz.lrhm.phiapp.core.data.source.remoteDataSource
 
+import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.await
 import com.apollographql.apollo.coroutines.toFlow
@@ -26,6 +27,10 @@ class RemoteDataSource @Inject constructor(
     val cacheUtil: CacheUtil
 ) {
 
+    val user = MutableLiveData<GetUserQuery.User>()
+
+    var cachedUser: GetUserQuery.User? = null
+
     suspend fun login(username: String, password: String) = withContext(Dispatchers.IO) {
         val response = try {
 
@@ -50,14 +55,17 @@ class RemoteDataSource @Inject constructor(
         val token = cacheUtil.getToken()
         apolloClient.query(GetUserQuery()).toBuilder()
             .responseFetcher(ApolloResponseFetchers.CACHE_FIRST).requestHeaders(
-            RequestHeaders.builder().addHeader("Authorization", token).build()
-        ).build().watcher().toFlow().collect {
+                RequestHeaders.builder().addHeader("Authorization", token).build()
+            ).build().watcher().toFlow().collect {
 
 
-            withContext(Dispatchers.Main) {
-                cacheUtil.user.value = it.data?.user
+                if (it.data?.user != null)
+
+                    withContext(Dispatchers.Main) {
+                        user.value = it.data!!.user!!
+                        cachedUser = it.data!!.user
+                    }
             }
-        }
     }
 
     suspend fun getUser() = withContext(Dispatchers.IO) {
@@ -67,8 +75,8 @@ class RemoteDataSource @Inject constructor(
         val response = try {
             apolloClient.query(GetUserQuery()).toBuilder()
                 .responseFetcher(ApolloResponseFetchers.NETWORK_FIRST).requestHeaders(
-                RequestHeaders.builder().addHeader("Authorization", token).build()
-            ).build().await()
+                    RequestHeaders.builder().addHeader("Authorization", token).build()
+                ).build().await()
         } catch (e: ApolloException) {
             // handle protocol errors
             return@withContext ResultOf.Error(e)

@@ -28,7 +28,6 @@ class CacheUtil @Inject constructor(@ApplicationContext context: Context) {
       return  sharedPreferences.getString(TOKEN_KEY, "")!!
     }
 
-    val user = MutableLiveData<GetUserQuery.User>()
 
     companion object {
         const val TOKEN_KEY = "token"

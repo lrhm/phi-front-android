@@ -43,7 +43,7 @@ class ExerciseGalleryFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                cacheUtil.user.observe(viewLifecycleOwner){
+                appRepository.user.observe(viewLifecycleOwner){
                   val items=  it!!.patient!!.schedule!!.exercises!!
 
                     adapter = ExerciseGalleryRecyclerViewAdapter(items)
@@ -54,18 +54,5 @@ class ExerciseGalleryFragment : Fragment() {
         return binding.root
     }
 
-    companion object {
 
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            ExerciseGalleryFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
-    }
 }
