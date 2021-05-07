@@ -40,6 +40,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintWidth_percent="0.9"
                     android:visibility="invisible"
+                    app:surface_type="texture_view"
                     />
 
                 <androidx.viewpager2.widget.ViewPager2

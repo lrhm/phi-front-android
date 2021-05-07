@@ -121,7 +121,6 @@ class ExerciseFragment : Fragment() {
 
     fun initExoPlayer(url: String) {
         player = SimpleExoPlayer.Builder(requireContext()).build()
-        binding.playerView!!.player = player
         val dataSourceFactory = DefaultDataSourceFactory(
             requireContext(),
             Util.getUserAgent(requireContext(), "phiApp")
@@ -131,6 +130,8 @@ class ExerciseFragment : Fragment() {
             ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem)
         player!!.setMediaSource(mediaSource)
         player.prepare()
+
+        binding.playerView!!.player = player
 
     }
 

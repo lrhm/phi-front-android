@@ -32,6 +32,8 @@ allprojects {
 
 ext {
     graphQLVersion = "2.5.6"
+    multidexVersion = "2.0.1"
+
 }
 
 task clean(type: Delete) {
