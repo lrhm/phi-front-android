@@ -5,12 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
+import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import xyz.lrhm.phiapp.R
+import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.FragmentExerciseBinding
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ExerciseFragment : Fragment() {
 
     lateinit var binding: FragmentExerciseBinding
+
+    @Inject
+    lateinit var appRepository: AppRepository
+
+    val args: ExerciseFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,6 +30,14 @@ class ExerciseFragment : Fragment() {
         // Inflate the layout for this fragment
 
         binding = FragmentExerciseBinding.inflate(inflater, container, false)
+
+        val exercise = appRepository.getExercise(args.exerciseId)
+
+        val adapter = ExerciseImagesRecyclerViewAdapter(exercise.pictures)
+        binding.imageViewPager.adapter = adapter
+        TabLayoutMediator(binding.tabLayout, binding.imageViewPager){ tab, position ->
+
+        }.attach()
 
 
 //        val adapter = ScreenSlidePagerAdapter(this)

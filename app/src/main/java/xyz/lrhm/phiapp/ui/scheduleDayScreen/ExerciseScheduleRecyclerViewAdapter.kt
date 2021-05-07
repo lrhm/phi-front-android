@@ -3,8 +3,11 @@ package xyz.lrhm.phiapp.ui.scheduleDayScreen
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import xyz.lrhm.GetUserQuery
+import xyz.lrhm.phiapp.MobileNavigationDirections
 import xyz.lrhm.phiapp.databinding.ExerciseItemBinding
 import xyz.lrhm.phiapp.databinding.ScheduleExerciseItemBinding
 import xyz.lrhm.phiapp.ui.util.bindTo
@@ -12,7 +15,8 @@ import xyz.lrhm.phiapp.ui.util.bindTo
 
 class ExerciseScheduleRecyclerViewAdapter(
     private val values: List<GetUserQuery.Parameter?>,
-    private val exercises: List<GetUserQuery.Exercise?>
+    private val exercises: List<GetUserQuery.Exercise?>,
+    private val parent: Fragment,
 
 ) : RecyclerView.Adapter<ExerciseScheduleRecyclerViewAdapter.ViewHolder>() {
 
@@ -41,6 +45,11 @@ class ExerciseScheduleRecyclerViewAdapter(
         val url = exercise.pictures[0]!!.url.replace("localhost", "192.168.2.5")
         Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)
 
+
+        holder.binding.openButton.setOnClickListener {
+          val direction=  MobileNavigationDirections.actionGlobalExerciseFragment(exercise.id)
+            parent.findNavController().navigate(direction)
+        }
     }
 
     override fun getItemCount(): Int = values.size

@@ -51,6 +51,7 @@ private var columnCount = 1
             viewModel.setSelectedDate(pDate)
         }
 
+
         return binding.root
     }
 
@@ -96,7 +97,7 @@ private var columnCount = 1
                             columnCount <= 1 -> LinearLayoutManager(context)
                             else -> GridLayoutManager(context, columnCount)
                         }
-                        adapter = ExerciseScheduleRecyclerViewAdapter(enabledList, viewModel.getExercises())
+                        adapter = ExerciseScheduleRecyclerViewAdapter(enabledList, viewModel.getExercises(), this@ScheduleDayFragment)
 
                     }
 

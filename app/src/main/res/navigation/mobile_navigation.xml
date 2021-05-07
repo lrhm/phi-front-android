@@ -44,4 +44,16 @@
         app:launchSingleTop="true"
         app:popUpTo="@id/scheduleDayFragment"
         app:popUpToInclusive="false" />
+    <fragment
+        android:id="@+id/exerciseFragment"
+        android:name="xyz.lrhm.phiapp.ui.exerciseFragment.ExerciseFragment"
+        android:label="@string/showExercise" >
+        <argument
+            android:name="exerciseId"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_exerciseFragment"
+        app:destination="@id/exerciseFragment"
+        app:launchSingleTop="true" />
 </navigation>

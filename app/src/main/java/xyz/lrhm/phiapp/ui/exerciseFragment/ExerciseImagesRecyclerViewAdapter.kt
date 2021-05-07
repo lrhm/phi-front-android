@@ -9,7 +9,7 @@ import xyz.lrhm.phiapp.databinding.ExerciseItemBinding
 import xyz.lrhm.phiapp.databinding.ImageCarouselItemBinding
 import xyz.lrhm.phiapp.ui.exerciseGalleryScreen.ExerciseGalleryRecyclerViewAdapter
 
-class ExerciseImagesRecyclerViewAdapter(private val images: List<GetUserQuery.Picture>):
+class ExerciseImagesRecyclerViewAdapter(private val images: List<GetUserQuery.Picture?>):
     RecyclerView.Adapter<ExerciseImagesRecyclerViewAdapter.ViewHolder>(){
 
 
