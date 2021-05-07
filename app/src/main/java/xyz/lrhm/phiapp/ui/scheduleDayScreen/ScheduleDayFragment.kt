@@ -29,6 +29,7 @@ private var columnCount = 1
     val viewModel: ScheduleDayViewModel by viewModels({requireActivity()})
 
     val formatter = PersianDateFormat("j F Y")
+    val today = PersianDate()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,11 +37,37 @@ private var columnCount = 1
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentScheduleDayBinding.inflate(inflater, container, false)
+
+        observeLiveDatas()
+
+        binding.nextDayButton.setOnClickListener {
+            val pDate = PersianDate(viewModel.selectedDate.value!!.toDate())
+            pDate.addDay(1)
+            viewModel.setSelectedDate(pDate)
+        }
+
+        binding.prevDayButton.setOnClickListener {
+            val pDate = PersianDate(viewModel.selectedDate.value!!.time - 24 * 60 * 60 * 1000 )
+            viewModel.setSelectedDate(pDate)
+        }
+
+        return binding.root
+    }
+
+    fun observeLiveDatas(){
         viewModel.selectedDate.observe(viewLifecycleOwner){
-            val today = PersianDate()
-            if(today.isSameDay(it))
-            binding.dateBoldText.text=    "امروز" + " " + it.dayName() + " "
+            if(today.isSameDay(it)) {
+                binding.dateBoldText.text = "امروز" + " " + it.dayName() + " "
+                binding.todayButton.text = "امروز"
+                binding.todayButton.setOnClickListener {
+
+                }
+            }
             else{
+                binding.todayButton.text = "برو به امروز"
+                binding.todayButton.setOnClickListener {
+                    viewModel.setSelectedDate(today)
+                }
                 binding.dateBoldText.text=      it.dayName() + " "
 
             }
@@ -52,15 +79,18 @@ private var columnCount = 1
             Timber.d("day is ${day}")
             if(day == null  ){
 
+                setRestDay(true)
             }
             else{
                 val enabledList = day.parameters!!.filter { it!!.enabled == true }
 
                 if(enabledList.isEmpty()){
 
+                    setRestDay(true)
                 }
                 else{
 
+                    setRestDay(false)
                     with(binding.recyclerView) {
                         layoutManager = when {
                             columnCount <= 1 -> LinearLayoutManager(context)
@@ -75,9 +105,12 @@ private var columnCount = 1
             }
 
         }
+    }
 
+    fun setRestDay(isRest: Boolean){
+        binding.noExerciseTextView.visibility = if (isRest) View.VISIBLE else View.GONE
+        binding.recyclerView.visibility = if (isRest) View.GONE else View.VISIBLE
 
-        return binding.root
     }
 
 
