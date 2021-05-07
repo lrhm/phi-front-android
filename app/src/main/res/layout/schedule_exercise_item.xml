@@ -52,8 +52,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:drawableEnd="@drawable/ic_baseline_check_circle"
-                android:text="@string/submitEvaluation"
                 app:backgroundTint="#f8b157"
+
+                android:text="@string/submitEvaluation"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.3"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"

@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.FragmentExerciseBinding
+import xyz.lrhm.phiapp.ui.util.bindTo
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -45,16 +46,12 @@ class ExerciseFragment : Fragment() {
         binding.imageSelectButton.container.isSelected = true
         binding.imageSelectButton.imageView.isSelected = true
 
-//        binding.imageSelectButton.container.isSelected = true
-//
-//        binding.imageSelectButton.container.isSelected = true
 
+        binding.parametersContainer.bindTo(exercise.parameters!!)
 
-//        val adapter = ScreenSlidePagerAdapter(this)
-//        viewPager2.adapter = adapter
-//        TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
-//
-//        }.attach()
+        binding.titleTextView.text = exercise.title
+
+        binding.descriptionTextView.text = exercise.longDescription
 
         return binding.root
     }
