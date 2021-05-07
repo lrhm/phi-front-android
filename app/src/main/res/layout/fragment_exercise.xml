@@ -49,5 +49,34 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5060827" />
+
+        <include
+            android:id="@+id/imageSelectButton"
+            layout="@layout/image_select_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/topBarContainer"
+            app:layout_constraintWidth_percent="0.33" />
+
+        <include
+            android:id="@+id/videoSelectButton"
+            layout="@layout/video_select_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/topBarContainer"
+            app:layout_constraintWidth_percent="0.33" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

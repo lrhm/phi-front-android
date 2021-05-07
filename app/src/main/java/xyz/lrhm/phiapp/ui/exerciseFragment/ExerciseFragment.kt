@@ -42,6 +42,13 @@ class ExerciseFragment : Fragment() {
 
         }.attach()
 
+        binding.imageSelectButton.container.isSelected = true
+        binding.imageSelectButton.imageView.isSelected = true
+
+//        binding.imageSelectButton.container.isSelected = true
+//
+//        binding.imageSelectButton.container.isSelected = true
+
 
 //        val adapter = ScreenSlidePagerAdapter(this)
 //        viewPager2.adapter = adapter
