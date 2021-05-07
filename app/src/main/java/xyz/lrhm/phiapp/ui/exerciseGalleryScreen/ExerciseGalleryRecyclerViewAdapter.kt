@@ -31,6 +31,7 @@ class ExerciseGalleryRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]!!
 
+
         holder.binding.textView.text = item.title
 
 
