@@ -33,7 +33,10 @@ class ExerciseFragment : Fragment() {
 
         val exercise = appRepository.getExercise(args.exerciseId)
 
-        val adapter = ExerciseImagesRecyclerViewAdapter(exercise.pictures)
+        val list = exercise.pictures.toMutableList()
+            list.addAll(exercise.pictures)
+        list.addAll(list)
+        val adapter = ExerciseImagesRecyclerViewAdapter(list)
         binding.imageViewPager.adapter = adapter
         TabLayoutMediator(binding.tabLayout, binding.imageViewPager){ tab, position ->
 
