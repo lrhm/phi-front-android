@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import xyz.lrhm.GetUserQuery
 import xyz.lrhm.phiapp.databinding.ExerciseItemBinding
 import xyz.lrhm.phiapp.databinding.ScheduleExerciseItemBinding
+import xyz.lrhm.phiapp.ui.util.bindTo
 
 
 class ExerciseScheduleRecyclerViewAdapter(
@@ -29,19 +30,23 @@ class ExerciseScheduleRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]!!
+        val exercise = exercises.find { it!!.id == item.exerciseId }!!
 
-        holder.binding.titleTextView.text = item.title
+        holder.binding.titleTextView.text = exercise.title
+
+        holder.binding.parametersContainer.bindTo(
+            item.parameters!!
+        )
 //
-        val exercise = exercises.find { it!!.id == item.exerciseId }
-        val url = exercise!!.pictures[0]!!.url.replace("localhost", "192.168.2.5")
+        val url = exercise.pictures[0]!!.url.replace("localhost", "192.168.2.5")
         Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)
 
     }
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(val binding: ScheduleExerciseItemBinding) : RecyclerView.ViewHolder(binding.root)
-
+    inner class ViewHolder(val binding: ScheduleExerciseItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
 
 }

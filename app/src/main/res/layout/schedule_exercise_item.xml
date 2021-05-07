@@ -8,20 +8,19 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="5dp"
-        android:padding="8dp"
-        android:clipToPadding="false"
-
+        android:layout_margin="16dp"
         android:layout_marginTop="8dp"
-        >
+        android:clipToPadding="false"
+        android:padding="8dp"
+
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            >
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/titleTextView"
@@ -42,9 +41,9 @@
                 android:layout_marginTop="16dp"
                 android:drawableEnd="@drawable/ic_baseline_eye"
                 android:text="@string/show"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.3"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/midContainer" />
 
             <Button
@@ -55,9 +54,9 @@
                 android:drawableEnd="@drawable/ic_baseline_check_circle"
                 android:text="@string/submitEvaluation"
                 app:backgroundTint="#f8b157"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintHorizontal_bias="0.6"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toBottomOf="@+id/midContainer" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
