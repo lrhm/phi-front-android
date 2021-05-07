@@ -56,4 +56,19 @@
         android:id="@+id/action_global_exerciseFragment"
         app:destination="@id/exerciseFragment"
         app:launchSingleTop="true" />
+    <fragment
+        android:id="@+id/submitEvaluationFragment"
+        android:name="xyz.lrhm.phiapp.ui.submitEvaluationScreen.SubmitEvaluationFragment"
+        android:label="SubmitEvaluationFragment" >
+        <argument
+            android:name="exerciseId"
+            app:argType="string" />
+        <argument
+            android:name="dayId"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_submitEvaluationFragment"
+        app:destination="@id/submitEvaluationFragment"
+        app:launchSingleTop="true" />
 </navigation>

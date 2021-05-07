@@ -1,26 +1,26 @@
 package xyz.lrhm.phiapp.ui.exerciseFragment
 
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util
+import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import xyz.lrhm.phiapp.R
+import timber.log.Timber
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.FragmentExerciseBinding
 import xyz.lrhm.phiapp.ui.util.bindTo
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class ExerciseFragment : Fragment() {
@@ -70,7 +70,9 @@ class ExerciseFragment : Fragment() {
                 toggleViews()
         }
 
-        initExoPlayer(exercise.videos[0]!!.url.replace("localhost","192.168.2.5"))
+        initExoPlayer(exercise.videos[0]!!.url.replace("localhost", "192.168.2.5"))
+
+//        toggleViews()
 
         binding.parametersContainer.bindTo(exercise.parameters!!)
 
@@ -81,12 +83,12 @@ class ExerciseFragment : Fragment() {
         return binding.root
     }
 
-    fun toggleViews(){
+    fun toggleViews() {
         isImagesSelected = !isImagesSelected
 
-        if(isImagesSelected){
+        if (isImagesSelected) {
 
-            if(player.isPlaying)
+            if (player.isPlaying)
                 player.stop()
 
             binding.imageSelectButton.container.isSelected = true
@@ -101,7 +103,7 @@ class ExerciseFragment : Fragment() {
             binding.playerView.visibility = View.INVISIBLE
             binding.imageViewPager.visibility = View.VISIBLE
             binding.tabLayout.visibility = View.VISIBLE
-        }else{
+        } else {
             binding.imageSelectButton.container.isSelected = false
             binding.imageSelectButton.imageView.isSelected = false
             binding.imageSelectButton.textView.isSelected = false
@@ -120,16 +122,22 @@ class ExerciseFragment : Fragment() {
 
 
     fun initExoPlayer(url: String) {
+
+        Timber.d("init exoo")
+
+        val dataSourceFactory: DataSource.Factory = DefaultHttpDataSourceFactory()
+
+        val mediaSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+            .createMediaSource(MediaItem.fromUri(url))
+
         player = SimpleExoPlayer.Builder(requireContext()).build()
-        val dataSourceFactory = DefaultDataSourceFactory(
-            requireContext(),
-            Util.getUserAgent(requireContext(), "phiApp")
-        )
-        val mediaItem = MediaItem.fromUri(url)
-        val mediaSource =
-            ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem)
-        player!!.setMediaSource(mediaSource)
+
+        player.setMediaSource(mediaSource)
+
         player.prepare()
+
+//        binding.playerView.player = player
+
 
         binding.playerView!!.player = player
 
