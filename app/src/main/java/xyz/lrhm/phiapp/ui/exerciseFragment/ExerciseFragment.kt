@@ -53,6 +53,7 @@ class ExerciseFragment : Fragment() {
 //        retainInstance
         binding = FragmentExerciseBinding.inflate(inflater, container, false)
 
+
         val exercise = appRepository.getExercise(args.exerciseId)
 
         val list = exercise.pictures.toMutableList().subList(0, exercise.pictures.size)
@@ -85,12 +86,24 @@ class ExerciseFragment : Fragment() {
 
         binding.evaluationButton.visibility = View.GONE
         binding.parametersContainer.root.visibility = View.GONE
+        binding.additionalInstructionsTextView.visibility = View.GONE
+
         if (args.exerciseParameterId != null) {
+
+
             binding.evaluationButton.visibility = View.VISIBLE
             binding.parametersContainer.root.visibility = View.VISIBLE
             val params = appRepository.getParametersForDay(args.exerciseParameterId!!)!!
             binding.parametersContainer.bindTo(params.parameters!!)
+
+            if(params.additionalInstructions != ""){
+                binding.additionalInstructionsTextView.visibility = View.VISIBLE
+                binding.additionalInstructionsTextView.text = params.additionalInstructions
+            }
         }
+
+
+
 //        else if (exercise.type == ExerciseType.EXERCISE){
 //            binding.parametersContainer.bindToA(exercise.parameters!!)
 //
@@ -105,7 +118,7 @@ class ExerciseFragment : Fragment() {
         binding.evaluationButton.setOnClickListener {
 
             val direction =
-                MobileNavigationDirections.actionGlobalSubmitEvaluationFragment(args.exerciseParameterId!!)
+                MobileNavigationDirections.actionGlobalSubmitEvaluationFragment(args.exerciseParameterId!!, args.dayId!! )
             findNavController().navigate(direction)
         }
 

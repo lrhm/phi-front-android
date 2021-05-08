@@ -36,6 +36,8 @@ class AppRepository @Inject constructor(
 
     fun getExercise(id: String) = getExercises().find { it?.id == id }!!
 
+//    fun
+
     fun getParametersForDay(exerciseParameterId: String): APIQuery.Parameter1? {
 
         val days = getCachedAPIRes().patient!!.schedule!!.days!!

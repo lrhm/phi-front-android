@@ -12,6 +12,7 @@ import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.ParameterEvaluationItemBinding
 import xyz.lrhm.phiapp.databinding.SubmitEvaluationFragmentBinding
+import xyz.lrhm.phiapp.ui.util.bindTo
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -37,8 +38,10 @@ class SubmitEvaluationFragment : Fragment() {
         binding = SubmitEvaluationFragmentBinding.inflate(inflater, container, false)
 
 
-        val params = appRepository.getParametersForDay(args.exerciseParameterId)
+        val params = appRepository.getParametersForDay(args.exerciseParameterId)!!
 
+
+        binding.parameterEvalContainer.bindTo(params!!.parameters!!)
 
         return binding.root
     }

@@ -76,7 +76,7 @@ fun ParametersContainerBinding.bindToA(parameters: List<APIQuery.Parameter?>) {
 
 }
 
-fun ParameterEvaluationListBinding.bindTo(evaluations: List<APIQuery.Parameter>) {
+fun ParameterEvaluationListBinding.bindTo(evaluations: List<APIQuery.Parameter2?>) {
 
 
     val viewLists = listOf(repsPerDay, reps, hold, sets, totalDuration)

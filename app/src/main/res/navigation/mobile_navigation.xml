@@ -55,6 +55,10 @@
             android:name="exerciseParameterId"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="dayId"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <action
         android:id="@+id/action_global_exerciseFragment"
@@ -66,6 +70,9 @@
         android:label="SubmitEvaluationFragment" >
         <argument
             android:name="exerciseParameterId"
+            app:argType="string" />
+        <argument
+            android:name="dayId"
             app:argType="string" />
     </fragment>
     <action

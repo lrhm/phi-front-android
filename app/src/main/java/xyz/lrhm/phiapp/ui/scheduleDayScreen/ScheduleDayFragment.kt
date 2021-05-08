@@ -93,7 +93,10 @@ private var columnCount = 1
                             columnCount <= 1 -> LinearLayoutManager(context)
                             else -> GridLayoutManager(context, columnCount)
                         }
-                        adapter = ExerciseScheduleRecyclerViewAdapter(enabledList, viewModel.getExercises(), this@ScheduleDayFragment)
+                        adapter = ExerciseScheduleRecyclerViewAdapter(enabledList,
+                            viewModel.getExercises(), this@ScheduleDayFragment,
+                            day.id
+                        )
 
                     }
 

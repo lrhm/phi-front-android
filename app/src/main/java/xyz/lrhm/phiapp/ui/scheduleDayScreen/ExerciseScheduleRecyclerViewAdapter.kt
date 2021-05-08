@@ -16,6 +16,7 @@ class ExerciseScheduleRecyclerViewAdapter(
     private val values: List<APIQuery.Parameter1?>,
     private val exercises: List<APIQuery.Exercise?>,
     private val parent: Fragment,
+    private val dayId: String
 
     ) : RecyclerView.Adapter<ExerciseScheduleRecyclerViewAdapter.ViewHolder>() {
 
@@ -52,7 +53,7 @@ class ExerciseScheduleRecyclerViewAdapter(
 
 
         holder.binding.openButton.setOnClickListener {
-          val direction=  MobileNavigationDirections.actionGlobalExerciseFragment(exercise.id, item.id)
+          val direction=  MobileNavigationDirections.actionGlobalExerciseFragment(exercise.id, item.id, dayId)
             parent.findNavController().navigate(direction)
         }
     }

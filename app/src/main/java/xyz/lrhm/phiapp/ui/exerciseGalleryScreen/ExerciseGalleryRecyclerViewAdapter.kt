@@ -51,7 +51,7 @@ class ExerciseGalleryRecyclerViewAdapter(
         Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)
 
         holder.binding.button.setOnClickListener {
-            val direction=  MobileNavigationDirections.actionGlobalExerciseFragment(item.id, null)
+            val direction=  MobileNavigationDirections.actionGlobalExerciseFragment(item.id, null, null)
             parent.findNavController().navigate(direction)
         }
 
