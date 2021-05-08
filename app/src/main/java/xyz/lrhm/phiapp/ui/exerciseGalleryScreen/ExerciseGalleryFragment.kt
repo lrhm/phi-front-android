@@ -46,7 +46,7 @@ class ExerciseGalleryFragment : Fragment() {
                 appRepository.user.observe(viewLifecycleOwner){
                   val items=  it!!.patient!!.schedule!!.exercises!!
 
-                    adapter = ExerciseGalleryRecyclerViewAdapter(items)
+                    adapter = ExerciseGalleryRecyclerViewAdapter(items, this@ExerciseGalleryFragment)
 
                 }
             }

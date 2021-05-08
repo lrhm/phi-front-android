@@ -23,6 +23,7 @@ import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.FragmentExerciseBinding
 import xyz.lrhm.phiapp.ui.util.bindTo
+import xyz.lrhm.phiapp.ui.util.bindToA
 import xyz.lrhm.type.ExerciseType
 import javax.inject.Inject
 
@@ -46,14 +47,16 @@ class ExerciseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+         isImagesSelected = true
 
+//        retainInstance
         binding = FragmentExerciseBinding.inflate(inflater, container, false)
 
         val exercise = appRepository.getExercise(args.exerciseId)
 
         val list = exercise.pictures.toMutableList()
-        list.addAll(exercise.pictures)
-        list.addAll(list)
+//        list.addAll(exercise.pictures)
+//        list.addAll(list)
         val adapter = ExerciseImagesRecyclerViewAdapter(list)
         binding.imageViewPager.adapter = adapter
         TabLayoutMediator(binding.tabLayout, binding.imageViewPager) { tab, position ->
@@ -80,14 +83,17 @@ class ExerciseFragment : Fragment() {
 //        toggleViews()
 
         binding.evaluationButton.visibility = View.GONE
+        binding.parametersContainer.root.visibility = View.GONE
         if(args.exerciseParameterId != null){
             binding.evaluationButton.visibility = View.VISIBLE
-
+            binding.parametersContainer.root.visibility = View.VISIBLE
             val params = appRepository.getParametersForDay(args.exerciseParameterId!!)!!
-//            binding.parametersContainer.bindTo(params.parameters!!)
+            binding.parametersContainer.bindTo(params.parameters!!)
         }
-        else if (exercise.type == ExerciseType.EXERCISE){}
-//        binding.parametersContainer.bindTo(exercise.parameters!!)
+//        else if (exercise.type == ExerciseType.EXERCISE){
+//            binding.parametersContainer.bindToA(exercise.parameters!!)
+//
+//        }
 
         binding.titleTextView.text = exercise.title
 
@@ -98,7 +104,7 @@ class ExerciseFragment : Fragment() {
         binding.evaluationButton.setOnClickListener {
 
             val direction = MobileNavigationDirections.actionGlobalSubmitEvaluationFragment(args.exerciseParameterId!!)
-            findNavController().navigate(R.id.action_global_submitEvaluationFragment)
+            findNavController().navigate(direction)
         }
 
         return binding.root
@@ -142,7 +148,22 @@ class ExerciseFragment : Fragment() {
     }
 
 
+    override fun onPause() {
+        super.onPause()
+
+        player.stop()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        isImagesSelected = true
+    }
+
     fun initExoPlayer(url: String) {
+
+//        if(::player.isInitialized)
+//            return
 
         Timber.d("init exoo")
 
