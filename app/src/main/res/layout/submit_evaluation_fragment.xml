@@ -33,6 +33,7 @@
             app:layout_constraintTop_toTopOf="@+id/doExerciseTextView" />
 
         <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flexBoxContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

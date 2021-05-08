@@ -18,10 +18,12 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import xyz.lrhm.phiapp.MobileNavigationDirections
 import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.FragmentExerciseBinding
 import xyz.lrhm.phiapp.ui.util.bindTo
+import xyz.lrhm.type.ExerciseType
 import javax.inject.Inject
 
 
@@ -77,13 +79,25 @@ class ExerciseFragment : Fragment() {
 
 //        toggleViews()
 
+        binding.evaluationButton.visibility = View.GONE
+        if(args.exerciseParameterId != null){
+            binding.evaluationButton.visibility = View.VISIBLE
+
+            val params = appRepository.getParametersForDay(args.exerciseParameterId!!)!!
+            binding.parametersContainer.bindTo(params.parameters!!)
+        }
+        else if (exercise.type == ExerciseType.EXERCISE)
         binding.parametersContainer.bindTo(exercise.parameters!!)
 
         binding.titleTextView.text = exercise.title
 
         binding.descriptionTextView.text = exercise.longDescription
 
+
+
         binding.evaluationButton.setOnClickListener {
+
+            val direction = MobileNavigationDirections.actionGlobalSubmitEvaluationFragment(args.exerciseParameterId!!)
             findNavController().navigate(R.id.action_global_submitEvaluationFragment)
         }
 

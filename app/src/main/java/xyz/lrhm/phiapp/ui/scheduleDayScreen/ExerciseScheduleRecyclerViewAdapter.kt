@@ -47,7 +47,7 @@ class ExerciseScheduleRecyclerViewAdapter(
 
 
         holder.binding.openButton.setOnClickListener {
-          val direction=  MobileNavigationDirections.actionGlobalExerciseFragment(exercise.id)
+          val direction=  MobileNavigationDirections.actionGlobalExerciseFragment(exercise.id, item.id)
             parent.findNavController().navigate(direction)
         }
     }
