@@ -1,5 +1,10 @@
 package xyz.lrhm.phiapp.ui.submitEvaluationScreen
 
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.graphics.drawable.GradientDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -44,11 +49,12 @@ class SubmitEvaluationFragment : Fragment() {
 
         viewModel.load(args.exerciseParameterId)
 
-        viewModel.parameters.observe(viewLifecycleOwner){ params ->
+        viewModel.parameters.observe(viewLifecycleOwner) { params ->
             binding.parameterEvalContainer.bindTo(params, viewModel.parameters)
 
         }
 
+        (binding.test.drawable as GradientDrawable).setStroke(4, Color.RED)
         return binding.root
     }
 

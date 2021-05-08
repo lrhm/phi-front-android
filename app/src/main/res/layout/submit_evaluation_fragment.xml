@@ -46,5 +46,30 @@
                android:id="@+id/parameterEvalContainer"
                />
 
+        <ImageView
+            android:id="@+id/test"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/bordered_circle"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parameterEvalContainer"
+            app:layout_constraintWidth_percent="0.095" />
+
+        <ImageView
+            android:id="@+id/test2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/selected_bordered_circle"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/test"
+            app:tint="@color/purple_200"
+            app:layout_constraintWidth_percent="0.095" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
