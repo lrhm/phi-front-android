@@ -2,6 +2,7 @@ package xyz.lrhm.phiapp.ui.util
 
 import android.content.Context
 import android.view.View
+import timber.log.Timber
 import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.databinding.DottedLabelTextBinding
 import xyz.lrhm.phiapp.databinding.ParameterEvaluationItemBinding
@@ -79,13 +80,18 @@ fun ParametersContainerBinding.bindToA(parameters: List<APIQuery.Parameter?>) {
 fun ParameterEvaluationListBinding.bindTo(evaluations: List<APIQuery.Parameter2?>) {
 
 
-    val viewLists = listOf(repsPerDay, reps, hold, sets, totalDuration)
+//    Timber.d("binding to  parameters in evaluation $evaluations")
+
+    val viewLists = mutableListOf(repsPerDay, reps, hold, sets, totalDuration)
 
     for (i in 0 until viewLists.size) {
+        val v =  viewLists[i]
+        if(i >= evaluations.size) {
+            v.root.visibility = View.GONE
+            continue
+        }
         val param = evaluations[i]!!
-        val v = viewLists[i]
 
-//        v.titleTextView
 
         if (param.enabled) {
             v.titleTextView.text = param.title + ":"

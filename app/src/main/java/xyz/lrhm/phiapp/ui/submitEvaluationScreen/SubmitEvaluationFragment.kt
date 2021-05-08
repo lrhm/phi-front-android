@@ -38,10 +38,12 @@ class SubmitEvaluationFragment : Fragment() {
         binding = SubmitEvaluationFragmentBinding.inflate(inflater, container, false)
 
 
-        val params = appRepository.getParametersForDay(args.exerciseParameterId)!!
+        val params = appRepository.getParametersForDay(args.exerciseParameterId)!!.parameters!!.filter {
+            it?.enabled == true && it?.name.contains("rest") == false
+        }
 
 
-        binding.parameterEvalContainer.bindTo(params!!.parameters!!)
+        binding.parameterEvalContainer.bindTo(params)
 
         return binding.root
     }
