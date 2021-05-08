@@ -19,4 +19,6 @@
     <string name="submitEvaluation">ثبت عملکرد</string>
     <string name="showExercise">مشاهده تمرین</string>
     <string name="video">فیلم</string>
+    <string name="doExercises">انجام تمرین</string>
+    <string name="submitExerciseEvaluation">:(میزان تمرین انجام شده را ثبت کنید)</string>
 </resources>

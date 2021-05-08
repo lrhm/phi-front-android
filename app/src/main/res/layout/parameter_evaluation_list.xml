@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:alignContent="flex_start"
+        app:alignItems="flex_start"
+        app:flexWrap="wrap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doExerciseTextView">
+
+
+        <include
+            layout="@layout/parameter_evaluation_item"
+            android:id="@+id/reps" />
+
+        <include
+            layout="@layout/parameter_evaluation_item"
+            android:id="@+id/repsPerDay" />
+
+        <include
+            layout="@layout/parameter_evaluation_item"
+            android:id="@+id/hold" />
+
+        <include
+            layout="@layout/parameter_evaluation_item"
+            android:id="@+id/sets" />
+
+        <include
+            layout="@layout/parameter_evaluation_item"
+            android:id="@+id/totalDuration" />
+
+
+    </com.google.android.flexbox.FlexboxLayout>
+</layout>

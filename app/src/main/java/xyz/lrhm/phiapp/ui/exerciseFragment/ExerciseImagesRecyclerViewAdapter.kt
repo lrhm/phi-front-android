@@ -23,9 +23,9 @@ class ExerciseImagesRecyclerViewAdapter(private val images: List<APIQuery.Pictur
                 false
             )
         )
-        val width =  parent.context.resources.displayMetrics.widthPixels * 0.8
-        holder.binding.imageView.layoutParams.width = width.toInt()
-        holder.binding.imageView.layoutParams.height = width.toInt()
+//        val width =  parent.context.resources.displayMetrics.widthPixels * 0.8
+//        holder.binding.imageView.layoutParams.width = width.toInt()
+//        holder.binding.imageView.layoutParams.height = width.toInt()
         return  holder
     }
 

@@ -55,7 +55,7 @@ class ExerciseFragment : Fragment() {
 
         val exercise = appRepository.getExercise(args.exerciseId)
 
-        val list = exercise.pictures.toMutableList()
+        val list = exercise.pictures.toMutableList().subList(0, exercise.pictures.size)
 //        list.addAll(exercise.pictures)
 //        list.addAll(list)
         val adapter = ExerciseImagesRecyclerViewAdapter(list)
@@ -140,7 +140,7 @@ class ExerciseFragment : Fragment() {
             binding.videoSelectButton.textView.isSelected = false
 
 
-            binding.playerView.visibility = View.GONE
+            binding.playerView.visibility = View.INVISIBLE
             binding.imageViewPager.visibility = View.VISIBLE
             binding.tabLayout.visibility = View.VISIBLE
         } else {
@@ -153,8 +153,8 @@ class ExerciseFragment : Fragment() {
             binding.videoSelectButton.textView.isSelected = true
 
             binding.playerView.visibility = View.VISIBLE
-            binding.imageViewPager.visibility = View.GONE
-            binding.tabLayout.visibility = View.GONE
+            binding.imageViewPager.visibility = View.INVISIBLE
+            binding.tabLayout.visibility = View.INVISIBLE
 
 
         }
