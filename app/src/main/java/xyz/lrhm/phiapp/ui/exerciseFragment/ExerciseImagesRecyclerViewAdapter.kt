@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import xyz.lrhm.GetUserQuery
+import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.databinding.ExerciseItemBinding
 import xyz.lrhm.phiapp.databinding.ImageCarouselItemBinding
 import xyz.lrhm.phiapp.ui.exerciseGalleryScreen.ExerciseGalleryRecyclerViewAdapter
 
-class ExerciseImagesRecyclerViewAdapter(private val images: List<GetUserQuery.Picture?>):
+class ExerciseImagesRecyclerViewAdapter(private val images: List<APIQuery.Picture?>):
     RecyclerView.Adapter<ExerciseImagesRecyclerViewAdapter.ViewHolder>(){
 
 

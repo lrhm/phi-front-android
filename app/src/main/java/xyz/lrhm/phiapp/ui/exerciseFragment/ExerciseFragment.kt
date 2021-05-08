@@ -84,10 +84,10 @@ class ExerciseFragment : Fragment() {
             binding.evaluationButton.visibility = View.VISIBLE
 
             val params = appRepository.getParametersForDay(args.exerciseParameterId!!)!!
-            binding.parametersContainer.bindTo(params.parameters!!)
+//            binding.parametersContainer.bindTo(params.parameters!!)
         }
-        else if (exercise.type == ExerciseType.EXERCISE)
-        binding.parametersContainer.bindTo(exercise.parameters!!)
+        else if (exercise.type == ExerciseType.EXERCISE){}
+//        binding.parametersContainer.bindTo(exercise.parameters!!)
 
         binding.titleTextView.text = exercise.title
 

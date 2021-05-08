@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import xyz.lrhm.GetUserQuery
+import xyz.lrhm.APIQuery
 import xyz.lrhm.LoginQuery
 import xyz.lrhm.phiapp.core.data.model.ResultOf
 import xyz.lrhm.phiapp.core.util.CacheUtil
@@ -27,9 +27,9 @@ class RemoteDataSource @Inject constructor(
     val cacheUtil: CacheUtil
 ) {
 
-    val user = MutableLiveData<GetUserQuery.User>()
+    val user = MutableLiveData<APIQuery.User>()
 
-    var cachedUser: GetUserQuery.User? = null
+    var cachedUser: APIQuery.User? = null
 
     suspend fun login(username: String, password: String) = withContext(Dispatchers.IO) {
         val response = try {
@@ -53,7 +53,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun watchUser() {
 
         val token = cacheUtil.getToken()
-        apolloClient.query(GetUserQuery()).toBuilder()
+        apolloClient.query(APIQuery()).toBuilder()
             .responseFetcher(ApolloResponseFetchers.CACHE_FIRST).requestHeaders(
                 RequestHeaders.builder().addHeader("Authorization", token).build()
             ).build().watcher().toFlow().collect {
@@ -73,7 +73,7 @@ class RemoteDataSource @Inject constructor(
 
         val token = cacheUtil.getToken()
         val response = try {
-            apolloClient.query(GetUserQuery()).toBuilder()
+            apolloClient.query(APIQuery()).toBuilder()
                 .responseFetcher(ApolloResponseFetchers.NETWORK_FIRST).requestHeaders(
                     RequestHeaders.builder().addHeader("Authorization", token).build()
                 ).build().await()

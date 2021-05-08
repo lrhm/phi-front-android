@@ -1,7 +1,7 @@
 package xyz.lrhm.phiapp.core.data.source
 
 import saman.zamani.persiandate.PersianDate
-import xyz.lrhm.GetUserQuery
+import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.core.data.source.remoteDataSource.RemoteDataSource
 import xyz.lrhm.phiapp.core.util.*
 import java.util.*
@@ -17,7 +17,7 @@ class AppRepository @Inject constructor(
 
     suspend fun doLogin(username: String, password: String) = remoteDataSource.login(username, password)
 
-//    var user: GetUserQuery.User? = null
+//    var user: APIQuery.User? = null
 
     fun isLoggedIn() = cacheUtil.getToken() != ""
 
@@ -25,7 +25,7 @@ class AppRepository @Inject constructor(
 
     val user = remoteDataSource.user
 
-    fun getTodaySchedule(): GetUserQuery.Day? {
+    fun getTodaySchedule(): APIQuery.Day? {
 
         val today = PersianDate(Date())
 
@@ -36,7 +36,7 @@ class AppRepository @Inject constructor(
 
     fun getExercise(id: String) = getExercises().find { it?.id == id }!!
 
-    fun getParametersForDay(exerciseParameterId: String): GetUserQuery.Parameter? {
+    fun getParametersForDay(exerciseParameterId: String): APIQuery.Parameter1? {
 
         val days = getCachedAPIRes().patient!!.schedule!!.days!!
         for(day in days){
@@ -51,7 +51,7 @@ class AppRepository @Inject constructor(
 
     }
 
-    fun getScheduleForDay(date: PersianDate): GetUserQuery.Day?{
+    fun getScheduleForDay(date: PersianDate): APIQuery.Day?{
         val user = getCachedAPIRes()
 
         user.patient?.schedule?.days.apply {

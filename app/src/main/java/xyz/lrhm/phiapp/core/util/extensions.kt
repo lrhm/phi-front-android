@@ -2,10 +2,10 @@ package xyz.lrhm.phiapp.core.util
 
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
-import xyz.lrhm.GetUserQuery
+import xyz.lrhm.APIQuery
 import java.util.*
 
-fun GetUserQuery.Day.getPersianDate(): PersianDate{
+fun APIQuery.Day.getPersianDate(): PersianDate{
 
 //    val pDate = PersianDate()
 //    val format = PersianDateFormat()
@@ -17,7 +17,7 @@ fun PersianDate.isSameDay(other: PersianDate): Boolean{
 }
 
 
-fun List<GetUserQuery.Day>?.getScheduleForDay(date: PersianDate): GetUserQuery.Day?{
+fun List<APIQuery.Day>?.getScheduleForDay(date: PersianDate): APIQuery.Day?{
 
     if(this != null)
     for (day in this){
@@ -31,7 +31,7 @@ fun List<GetUserQuery.Day>?.getScheduleForDay(date: PersianDate): GetUserQuery.D
     return null
 }
 
-fun List<GetUserQuery.Day>.getTodaySchedule(): GetUserQuery.Day?{
+fun List<APIQuery.Day>.getTodaySchedule(): APIQuery.Day?{
 
     val today = PersianDate(Date())
     if(this != null)

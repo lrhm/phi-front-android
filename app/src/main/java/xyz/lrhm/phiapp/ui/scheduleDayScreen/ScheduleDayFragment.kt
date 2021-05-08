@@ -6,18 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 import timber.log.Timber
-import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.core.util.isSameDay
 import xyz.lrhm.phiapp.databinding.FragmentScheduleDayBinding
-import xyz.lrhm.phiapp.ui.exerciseGalleryScreen.ExerciseGalleryRecyclerViewAdapter
-import xyz.lrhm.phiapp.ui.loginScreen.LoginViewModel
 
 @AndroidEntryPoint
 class ScheduleDayFragment : Fragment() {

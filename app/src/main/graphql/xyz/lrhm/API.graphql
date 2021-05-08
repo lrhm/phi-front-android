@@ -1,0 +1,89 @@
+query API {
+  user {
+    username
+    id
+    patient {
+      id
+      name
+      age
+      weight
+      schedule {
+        id
+        updatedAt
+        createdAt
+        startDate
+        endDate
+        exerciseIds
+        exercises{
+          createdAt
+          updatedAt
+          id
+          longDescription
+          type
+          instructions
+          additionalInstructions
+          pictures {
+            url
+            width
+            height
+            placeHolder
+            type
+            order
+            id
+          }
+          shortDescription
+          title
+          parameters {
+            id
+            enabled
+            name
+            value
+            secondValue
+            valueType
+            title
+
+          }
+          videos {
+            url
+            width
+            height
+            placeHolder
+            type
+            order
+            id
+          }
+          assesments {
+
+            id
+            enabled
+            name
+            title
+
+          }
+        }
+        days {
+          id
+          updatedAt
+          createdAt
+          date
+          parameters {
+            parameters {
+              id
+              enabled
+              name
+              value
+              secondValue
+              valueType
+              title
+
+            }
+            additionalInstructions
+            exerciseId
+            id
+            enabled
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import xyz.lrhm.GetUserQuery
 import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.ParameterEvaluationItemBinding
@@ -44,16 +43,7 @@ class SubmitEvaluationFragment : Fragment() {
         return binding.root
     }
 
-    fun populateParams(params: GetUserQuery.Parameter, inflater: LayoutInflater){
 
-//        for (param in params?.parameters.){
-//
-//            val parameterEvaluationItemBinding = ParameterEvaluationItemBinding.inflate(inflater)
-//
-//
-//        }
-
-    }
 
 //    override fun onActivityCreated(savedInstanceState: Bundle?) {
 //        super.onActivityCreated(savedInstanceState)

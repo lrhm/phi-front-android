@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.qualifiers.ApplicationContext
-import xyz.lrhm.GetUserQuery
+import xyz.lrhm.APIQuery
 import javax.inject.Inject
 import javax.inject.Singleton
 

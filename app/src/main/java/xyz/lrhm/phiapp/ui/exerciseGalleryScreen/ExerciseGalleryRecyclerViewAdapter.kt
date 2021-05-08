@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import xyz.lrhm.GetUserQuery
+import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.databinding.ExerciseItemBinding
 
 
@@ -13,7 +13,7 @@ import xyz.lrhm.phiapp.databinding.ExerciseItemBinding
  * TODO: Replace the implementation with code for your data type.
  */
 class ExerciseGalleryRecyclerViewAdapter(
-    private val values: List<GetUserQuery.Exercise?>
+    private val values: List<APIQuery.Exercise?>
 ) : RecyclerView.Adapter<ExerciseGalleryRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

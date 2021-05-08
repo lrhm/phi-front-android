@@ -6,19 +6,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import xyz.lrhm.GetUserQuery
+import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.MobileNavigationDirections
-import xyz.lrhm.phiapp.databinding.ExerciseItemBinding
 import xyz.lrhm.phiapp.databinding.ScheduleExerciseItemBinding
 import xyz.lrhm.phiapp.ui.util.bindTo
 
 
 class ExerciseScheduleRecyclerViewAdapter(
-    private val values: List<GetUserQuery.Parameter?>,
-    private val exercises: List<GetUserQuery.Exercise?>,
+    private val values: List<APIQuery.Parameter1?>,
+    private val exercises: List<APIQuery.Exercise?>,
     private val parent: Fragment,
 
-) : RecyclerView.Adapter<ExerciseScheduleRecyclerViewAdapter.ViewHolder>() {
+    ) : RecyclerView.Adapter<ExerciseScheduleRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -38,9 +37,9 @@ class ExerciseScheduleRecyclerViewAdapter(
 
         holder.binding.titleTextView.text = exercise.title
 
-        holder.binding.parametersContainer.bindTo(
-            item.parameters!!
-        )
+//        holder.binding.parametersContainer.bindTo(
+//            item.parameters!!
+//        )
 //
         val url = exercise.pictures[0]!!.url.replace("localhost", "192.168.2.5")
         Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)
