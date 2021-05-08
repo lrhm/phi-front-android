@@ -18,6 +18,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.MobileNavigationDirections
 import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.core.data.source.AppRepository
@@ -47,7 +48,7 @@ class ExerciseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-         isImagesSelected = true
+        isImagesSelected = true
 
 //        retainInstance
         binding = FragmentExerciseBinding.inflate(inflater, container, false)
@@ -68,13 +69,13 @@ class ExerciseFragment : Fragment() {
         binding.imageSelectButton.textView.isSelected = true
 
         binding.imageSelectButton.root.setOnClickListener {
-            if(!isImagesSelected)
+            if (!isImagesSelected)
                 toggleViews()
         }
 
 
         binding.videoSelectButton.root.setOnClickListener {
-            if(isImagesSelected)
+            if (isImagesSelected)
                 toggleViews()
         }
 
@@ -84,7 +85,7 @@ class ExerciseFragment : Fragment() {
 
         binding.evaluationButton.visibility = View.GONE
         binding.parametersContainer.root.visibility = View.GONE
-        if(args.exerciseParameterId != null){
+        if (args.exerciseParameterId != null) {
             binding.evaluationButton.visibility = View.VISIBLE
             binding.parametersContainer.root.visibility = View.VISIBLE
             val params = appRepository.getParametersForDay(args.exerciseParameterId!!)!!
@@ -103,11 +104,23 @@ class ExerciseFragment : Fragment() {
 
         binding.evaluationButton.setOnClickListener {
 
-            val direction = MobileNavigationDirections.actionGlobalSubmitEvaluationFragment(args.exerciseParameterId!!)
+            val direction =
+                MobileNavigationDirections.actionGlobalSubmitEvaluationFragment(args.exerciseParameterId!!)
             findNavController().navigate(direction)
         }
 
+        fixPlayerSize(exercise.videos[0]!!)
+
         return binding.root
+    }
+
+    fun fixPlayerSize(video: APIQuery.Video) {
+        val width = requireContext().resources.displayMetrics.widthPixels * 0.9
+
+        val height = (width/video.width!!) * video.height!!
+
+        binding.playerView.layoutParams.width = width.toInt()
+        binding.playerView.layoutParams.height = height.toInt()
     }
 
     fun toggleViews() {
@@ -127,7 +140,7 @@ class ExerciseFragment : Fragment() {
             binding.videoSelectButton.textView.isSelected = false
 
 
-            binding.playerView.visibility = View.INVISIBLE
+            binding.playerView.visibility = View.GONE
             binding.imageViewPager.visibility = View.VISIBLE
             binding.tabLayout.visibility = View.VISIBLE
         } else {
@@ -140,8 +153,8 @@ class ExerciseFragment : Fragment() {
             binding.videoSelectButton.textView.isSelected = true
 
             binding.playerView.visibility = View.VISIBLE
-            binding.imageViewPager.visibility = View.INVISIBLE
-            binding.tabLayout.visibility = View.INVISIBLE
+            binding.imageViewPager.visibility = View.GONE
+            binding.tabLayout.visibility = View.GONE
 
 
         }

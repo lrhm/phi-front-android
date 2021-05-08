@@ -35,7 +35,7 @@ class ExerciseGalleryRecyclerViewAdapter(
         holder.binding.imageView.layoutParams.width = width.toInt()
         holder.binding.imageView.layoutParams.height = width.toInt()
 
-        Timber.d("width is ${holder.binding.imageView.width}, ${holder.binding.imageView.measuredWidth}")
+//        Timber.d("width is ${holder.binding.imageView.width}, ${holder.binding.imageView.measuredWidth}")
 
         return holder
     }

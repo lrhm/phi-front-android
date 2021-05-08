@@ -16,13 +16,18 @@ class ExerciseImagesRecyclerViewAdapter(private val images: List<APIQuery.Pictur
     inner class ViewHolder(val binding: ImageCarouselItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
+        val holder = ViewHolder(
             ImageCarouselItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-        )    }
+        )
+        val width =  parent.context.resources.displayMetrics.widthPixels * 0.8
+        holder.binding.imageView.layoutParams.width = width.toInt()
+        holder.binding.imageView.layoutParams.height = width.toInt()
+        return  holder
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 

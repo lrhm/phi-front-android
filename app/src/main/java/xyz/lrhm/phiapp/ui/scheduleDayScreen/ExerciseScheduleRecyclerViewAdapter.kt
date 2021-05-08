@@ -21,13 +21,19 @@ class ExerciseScheduleRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        return ViewHolder(
+        val holder = ViewHolder(
             ScheduleExerciseItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
         )
+
+        val width =  parent.context.resources.displayMetrics.widthPixels * 0.3
+        holder.binding.imageView.layoutParams.width = width.toInt()
+        holder.binding.imageView.layoutParams.height = width.toInt()
+
+        return holder
 
     }
 

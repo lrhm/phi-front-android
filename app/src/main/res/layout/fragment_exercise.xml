@@ -41,6 +41,7 @@
                     app:layout_constraintWidth_percent="0.9"
                     android:visibility="invisible"
                     app:surface_type="texture_view"
+                    android:layout_marginBottom="16dp"
                     />
 
                 <androidx.viewpager2.widget.ViewPager2
