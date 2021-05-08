@@ -37,9 +37,9 @@ class ExerciseScheduleRecyclerViewAdapter(
 
         holder.binding.titleTextView.text = exercise.title
 
-//        holder.binding.parametersContainer.bindTo(
-//            item.parameters!!
-//        )
+        holder.binding.parametersContainer.bindTo(
+            item.parameters!!
+        )
 //
         val url = exercise.pictures[0]!!.url.replace("localhost", "192.168.2.5")
         Glide.with(holder.binding.imageView).load(url).into(holder.binding.imageView)
