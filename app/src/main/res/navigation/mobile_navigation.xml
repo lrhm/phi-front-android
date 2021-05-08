@@ -61,10 +61,7 @@
         android:name="xyz.lrhm.phiapp.ui.submitEvaluationScreen.SubmitEvaluationFragment"
         android:label="SubmitEvaluationFragment" >
         <argument
-            android:name="exerciseId"
-            app:argType="string" />
-        <argument
-            android:name="dayId"
+            android:name="exerciseParameterId"
             app:argType="string" />
     </fragment>
     <action

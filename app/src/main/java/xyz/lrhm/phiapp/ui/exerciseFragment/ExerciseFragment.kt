@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.danikula.videocache.HttpProxyCacheServer
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -16,6 +18,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.FragmentExerciseBinding
 import xyz.lrhm.phiapp.ui.util.bindTo
@@ -80,6 +83,10 @@ class ExerciseFragment : Fragment() {
 
         binding.descriptionTextView.text = exercise.longDescription
 
+        binding.evaluationButton.setOnClickListener {
+            findNavController().navigate(R.id.action_global_submitEvaluationFragment)
+        }
+
         return binding.root
     }
 
@@ -125,14 +132,22 @@ class ExerciseFragment : Fragment() {
 
         Timber.d("init exoo")
 
+        val proxyServer =
+            HttpProxyCacheServer.Builder(context).maxCacheSize(1024 * 1024 * 1024).build()
+
+        val proxyURL = proxyServer.getProxyUrl(url)
+
+
+        Timber.d("proxy url ${proxyURL}")
         val dataSourceFactory: DataSource.Factory = DefaultHttpDataSourceFactory()
 
         val mediaSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-            .createMediaSource(MediaItem.fromUri(url))
+            .createMediaSource(MediaItem.fromUri(proxyURL))
 
         player = SimpleExoPlayer.Builder(requireContext()).build()
 
-        player.setMediaSource(mediaSource)
+        player.setMediaItem(MediaItem.fromUri(proxyURL))
+//        player.setMediaSource(mediaSource)
 
         player.prepare()
 
