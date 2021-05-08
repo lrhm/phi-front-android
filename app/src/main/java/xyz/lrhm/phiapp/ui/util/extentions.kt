@@ -2,6 +2,7 @@ package xyz.lrhm.phiapp.ui.util
 
 import android.content.Context
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import timber.log.Timber
 import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.databinding.DottedLabelTextBinding
@@ -77,7 +78,10 @@ fun ParametersContainerBinding.bindToA(parameters: List<APIQuery.Parameter?>) {
 
 }
 
-fun ParameterEvaluationListBinding.bindTo(evaluations: List<APIQuery.Parameter2?>) {
+fun ParameterEvaluationListBinding.bindTo(
+    evaluations: List<APIQuery.Parameter2>,
+    liveData: MutableLiveData<List<APIQuery.Parameter2>>
+) {
 
 
 //    Timber.d("binding to  parameters in evaluation $evaluations")
@@ -85,8 +89,8 @@ fun ParameterEvaluationListBinding.bindTo(evaluations: List<APIQuery.Parameter2?
     val viewLists = mutableListOf(repsPerDay, reps, hold, sets, totalDuration)
 
     for (i in 0 until viewLists.size) {
-        val v =  viewLists[i]
-        if(i >= evaluations.size) {
+        val v = viewLists[i]
+        if (i >= evaluations.size) {
             v.root.visibility = View.GONE
             continue
         }
@@ -94,8 +98,48 @@ fun ParameterEvaluationListBinding.bindTo(evaluations: List<APIQuery.Parameter2?
 
 
         if (param.enabled) {
+
+            v.minusButton.setOnClickListener {
+
+                if (param.value != 0) {
+                    val newParam = param.copy(value = param.value?.minus(1))
+                    val newList = evaluations.toMutableList()
+                    newList[i] = newParam
+                    liveData.value = newList
+
+                } else if (param.secondValue != 0) {
+                    val newParam = param.copy(secondValue = param.secondValue?.minus(1))
+                    val newList = evaluations.toMutableList()
+                    newList[i] = newParam
+                    liveData.value = newList
+                }
+
+
+            }
+
+            v.plusButton.setOnClickListener {
+                if (param.value != null) {
+
+
+                    val newParam = param.copy(value = param.value?.plus(1))
+                    val newList = evaluations.toMutableList()
+                    newList[i] = newParam
+                    liveData.value = newList
+                    return@setOnClickListener
+
+                }
+                if (param.secondValue != 0) {
+                    val newParam = param.copy(secondValue = param.secondValue?.plus(1))
+                    val newList = evaluations.toMutableList()
+                    newList[i] = newParam
+                    liveData.value = newList
+                }
+
+            }
+
             v.titleTextView.text = param.title + ":"
             v.valueTextView.text = "${param.value}"
+
 
 
             if (param.valueType == ParameterType.TIME) {
