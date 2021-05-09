@@ -20,56 +20,130 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="@string/doExercises"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/doExerciseHelpTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:textSize="19sp"
-
             android:text="@string/submitExerciseEvaluation"
+
+            android:textSize="19sp"
+            app:layout_constraintBottom_toBottomOf="@+id/doExerciseTextView"
             app:layout_constraintStart_toEndOf="@+id/doExerciseTextView"
             app:layout_constraintTop_toTopOf="@+id/doExerciseTextView" />
 
 
-           <include layout="@layout/parameter_evaluation_list"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/doExerciseTextView"
-               android:id="@+id/parameterEvalContainer"
-               />
-
-        <ImageView
-            android:id="@+id/test"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/bordered_circle"
-            app:layout_constraintDimensionRatio="1:1"
+        <include
+            android:id="@+id/parameterEvalContainer"
+            layout="@layout/parameter_evaluation_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/parameterEvalContainer"
-            app:layout_constraintWidth_percent="0.095" />
+            app:layout_constraintTop_toBottomOf="@+id/doExerciseTextView" />
 
-        <ImageView
-            android:id="@+id/test2"
+        <TextView
+            android:id="@+id/feedbackTitleTextView"
+            style="@style/BoldTitleTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/submitFeedback"
+            app:layout_constraintStart_toStartOf="@+id/parameterEvalContainer"
+            app:layout_constraintTop_toBottomOf="@+id/parameterEvalContainer" />
+
+        <EditText
+            android:id="@+id/feedbackEditText"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/selected_bordered_circle"
-            app:layout_constraintDimensionRatio="1:1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="@string/feedback_hint"
+            android:inputType="textMultiLine"
+            android:minHeight="70dp"
+
+            android:minLines="3"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/parameterEvalContainer"
+            app:layout_constraintStart_toStartOf="@+id/feedbackTitleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/feedbackTitleTextView" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/painContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/test"
-            app:tint="@color/purple_200"
-            app:layout_constraintWidth_percent="0.095" />
+            app:layout_constraintTop_toBottomOf="@+id/feedbackEditText">
+
+            <TextView
+                android:id="@+id/painTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="درد"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/painLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="1dp"
+                android:text=": (0: بدون درد ، 10: شدیدترین در ممکن)"
+                android:textSize="19sp"
+                app:layout_constraintBottom_toBottomOf="@+id/painTitleTextView"
+                app:layout_constraintStart_toEndOf="@+id/painTitleTextView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/painSelectorContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="1dp"
+                android:orientation="horizontal"
+                android:layoutDirection="ltr"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/painTitleTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/test"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_marginTop="32dp"-->
+        <!--            android:src="@drawable/bordered_circle"-->
+        <!--            app:layout_constraintDimensionRatio="1:1"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/parameterEvalContainer"-->
+        <!--            app:layout_constraintWidth_percent="0.095" />-->
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/test2"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_marginTop="32dp"-->
+        <!--            android:src="@drawable/selected_bordered_circle"-->
+        <!--            app:layout_constraintDimensionRatio="1:1"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/test"-->
+        <!--            app:tint="@color/purple_200"-->
+        <!--            app:layout_constraintWidth_percent="0.095" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

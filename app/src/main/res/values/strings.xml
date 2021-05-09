@@ -21,4 +21,6 @@
     <string name="video">فیلم</string>
     <string name="doExercises">انجام تمرین</string>
     <string name="submitExerciseEvaluation">:(میزان تمرین انجام شده را ثبت کنید)</string>
+    <string name="submitFeedback">ثبت بازخورد:</string>
+    <string name="feedback_hint">...اگر در ارتباط با تمرین مشکل داشتید، بنویسید</string>
 </resources>

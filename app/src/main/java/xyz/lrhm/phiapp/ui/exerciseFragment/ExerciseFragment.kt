@@ -96,12 +96,11 @@ class ExerciseFragment : Fragment() {
             val params = appRepository.getParametersForDay(args.exerciseParameterId!!)!!
             binding.parametersContainer.bindTo(params.parameters!!)
 
-            if(params.additionalInstructions != ""){
+            if (params.additionalInstructions != "") {
                 binding.additionalInstructionsTextView.visibility = View.VISIBLE
                 binding.additionalInstructionsTextView.text = params.additionalInstructions
             }
         }
-
 
 
 //        else if (exercise.type == ExerciseType.EXERCISE){
@@ -118,7 +117,10 @@ class ExerciseFragment : Fragment() {
         binding.evaluationButton.setOnClickListener {
 
             val direction =
-                MobileNavigationDirections.actionGlobalSubmitEvaluationFragment(args.exerciseParameterId!!, args.dayId!! )
+                MobileNavigationDirections.actionGlobalSubmitEvaluationFragment(
+                    args.exerciseParameterId!!,
+                    args.dayId!!
+                )
             findNavController().navigate(direction)
         }
 
@@ -130,7 +132,7 @@ class ExerciseFragment : Fragment() {
     fun fixPlayerSize(video: APIQuery.Video) {
         val width = requireContext().resources.displayMetrics.widthPixels * 0.9
 
-        val height = (width/video.width!!) * video.height!!
+        val height = (width / video.width!!) * video.height!!
 
         binding.playerView.layoutParams.width = width.toInt()
         binding.playerView.layoutParams.height = height.toInt()
@@ -188,8 +190,8 @@ class ExerciseFragment : Fragment() {
 
     fun initExoPlayer(url: String) {
 
-//        if(::player.isInitialized)
-//            return
+        if (::player.isInitialized)
+            player.release()
 
         Timber.d("init exoo")
 
@@ -222,7 +224,8 @@ class ExerciseFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
 
-        player.release()
+        if (::player.isInitialized)
+            player.release()
     }
 
 }

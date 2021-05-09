@@ -11,18 +11,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.view.setMargins
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.core.data.source.AppRepository
+import xyz.lrhm.phiapp.databinding.PainSelectorItemBinding
 import xyz.lrhm.phiapp.databinding.ParameterEvaluationItemBinding
 import xyz.lrhm.phiapp.databinding.SubmitEvaluationFragmentBinding
 import xyz.lrhm.phiapp.ui.scheduleDayScreen.ScheduleDayViewModel
 import xyz.lrhm.phiapp.ui.util.bindTo
+import xyz.lrhm.phiapp.ui.util.getWidth
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -39,6 +45,7 @@ class SubmitEvaluationFragment : Fragment() {
 
     lateinit var binding: SubmitEvaluationFragmentBinding
 
+    val painSelectorList = mutableListOf<PainSelectorItemBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,10 +61,47 @@ class SubmitEvaluationFragment : Fragment() {
 
         }
 
-        (binding.test.drawable as GradientDrawable).setStroke(4, Color.RED)
+        generatePainSelectors(inflater)
+
+//        (binding.test.drawable as GradientDrawable).setStroke(4, Color.RED)
         return binding.root
     }
 
+
+    fun generatePainSelectors(inflater: LayoutInflater) {
+        val colorListValues = listOf(
+            "#2d437c",
+            "#27866a",
+            "#54a456",
+            "#8cb661",
+            "#afbf6e",
+            "#d1d84f",
+            "#e7d139",
+            "#d78f3c",
+            "#dc5e30",
+            "#b8232b",
+            "#a5201b"
+        )
+        val imageSize = requireContext().getWidth() * 0.0736
+        val margin = imageSize * 0.1
+
+        for (i in 0..10) {
+            val layoutParams = LinearLayout.LayoutParams(imageSize.toInt(), imageSize.toInt())
+            layoutParams.setMargins(margin.toInt())
+
+
+            val painSelector = PainSelectorItemBinding.inflate(inflater)
+
+            binding.painSelectorContainer.addView(painSelector.root, layoutParams)
+            painSelectorList.add(painSelector)
+            painSelector.imageView.setColorFilter(Color.parseColor(colorListValues[i]))
+            painSelector.textView.text= "${i}"
+            Glide.with(this).load(R.drawable.bordered_circle).into(painSelector.imageView)
+
+
+        }
+
+    }
 
 //    override fun onActivityCreated(savedInstanceState: Bundle?) {
 //        super.onActivityCreated(savedInstanceState)
