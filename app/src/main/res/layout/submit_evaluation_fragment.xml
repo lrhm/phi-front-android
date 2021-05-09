@@ -11,169 +11,58 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".ui.submitEvaluationScreen.SubmitEvaluationFragment"
-        android:paddingBottom="50dp"
-        >
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/exerciseFatigueContainer"
-            android:visibility="gone"
-            android:layout_width="0dp"
+            android:id="@+id/frameLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/exerciseDifficultyContainer">
+            android:paddingBottom="50dp"
+            tools:context=".ui.submitEvaluationScreen.SubmitEvaluationFragment">
 
-            <TextView
-                android:id="@+id/fatigueTitleTextView"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exerciseFatigueContainer"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/fatigue"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/fatigueSelectorContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="1dp"
-                android:layoutDirection="ltr"
-                app:flexDirection="row"
-                app:flexWrap="wrap"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fatigueTitleTextView" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@+id/exerciseDifficultyContainer">
 
-        <TextView
-            android:id="@+id/doExerciseTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/doExercises"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/doExerciseHelpTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:text="@string/submitExerciseEvaluation"
-
-            android:textSize="19sp"
-            app:layout_constraintBottom_toBottomOf="@+id/doExerciseTextView"
-            app:layout_constraintStart_toEndOf="@+id/doExerciseTextView"
-            app:layout_constraintTop_toTopOf="@+id/doExerciseTextView" />
+                <TextView
+                    android:id="@+id/fatigueTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/fatigue"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-        <include
-            android:id="@+id/parameterEvalContainer"
-            layout="@layout/parameter_evaluation_list"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/doExerciseTextView" />
-
-        <TextView
-            android:id="@+id/feedbackTitleTextView"
-            style="@style/BoldTitleTextViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/submitFeedback"
-            app:layout_constraintStart_toStartOf="@+id/parameterEvalContainer"
-            app:layout_constraintTop_toBottomOf="@+id/parameterEvalContainer" />
-
-        <xyz.lrhm.phiapp.ui.submitEvaluationScreen.components.ClearFocusEditText
-
-            android:id="@+id/feedbackEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:gravity="top"
-            android:hint="@string/feedback_hint"
-            android:inputType="textMultiLine"
-            android:minLines="2"
-            android:textColor="@color/black"
-            android:background="@drawable/rectange_round_bordered_white_bg"
-            android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/parameterEvalContainer"
-            app:layout_constraintStart_toStartOf="@+id/feedbackTitleTextView"
-            app:layout_constraintTop_toBottomOf="@+id/feedbackTitleTextView" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/exerciseDifficultyContainer"
-            android:visibility="gone"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/painContainer">
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/fatigueSelectorContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="1dp"
+                    android:layoutDirection="ltr"
+                    app:flexDirection="row"
+                    app:flexWrap="wrap"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fatigueTitleTextView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/difficultyTitleTextView"
+                android:id="@+id/doExerciseTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/exerciseDifficulty"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/difficultySelectorContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="1dp"
-                android:layoutDirection="ltr"
-                app:flexDirection="row"
-                app:flexWrap="wrap"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/difficultyTitleTextView" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/painContainer"
-            android:visibility="gone"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/feedbackEditText">
-
-            <TextView
-                android:id="@+id/painTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/pain"
+                android:layout_marginTop="24dp"
+                android:text="@string/doExercises"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -181,63 +70,178 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/painLabelTextView"
+                android:id="@+id/doExerciseHelpTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="@string/submitExerciseEvaluation"
 
-                android:layout_marginBottom="1dp"
-                android:text="@string/painLabelHint"
                 android:textSize="19sp"
-                app:layout_constraintBottom_toBottomOf="@+id/painTitleTextView"
-                app:layout_constraintStart_toEndOf="@+id/painTitleTextView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toBottomOf="@+id/doExerciseTextView"
+                app:layout_constraintStart_toEndOf="@+id/doExerciseTextView"
+                app:layout_constraintTop_toTopOf="@+id/doExerciseTextView" />
 
-            <LinearLayout
-                android:id="@+id/painSelectorContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="1dp"
-                android:layoutDirection="ltr"
-                android:orientation="horizontal"
+
+            <include
+                android:id="@+id/parameterEvalContainer"
+                layout="@layout/parameter_evaluation_list"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/painTitleTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/doExerciseTextView" />
+
+            <TextView
+                android:id="@+id/feedbackTitleTextView"
+                style="@style/BoldTitleTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/submitFeedback"
+                app:layout_constraintStart_toStartOf="@+id/parameterEvalContainer"
+                app:layout_constraintTop_toBottomOf="@+id/parameterEvalContainer" />
+
+            <xyz.lrhm.phiapp.ui.submitEvaluationScreen.components.ClearFocusEditText
+
+                android:id="@+id/feedbackEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rectange_round_bordered_white_bg"
+                android:ems="10"
+                android:gravity="top"
+                android:hint="@string/feedback_hint"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/parameterEvalContainer"
+                app:layout_constraintStart_toStartOf="@+id/feedbackTitleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/feedbackTitleTextView" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exerciseDifficultyContainer"
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/painContainer">
+
+                <TextView
+                    android:id="@+id/difficultyTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/exerciseDifficulty"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/difficultySelectorContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="1dp"
+                    android:layoutDirection="ltr"
+                    app:flexDirection="row"
+                    app:flexWrap="wrap"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/difficultyTitleTextView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/painContainer"
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/feedbackEditText">
+
+                <TextView
+                    android:id="@+id/painTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/pain"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/painLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="1dp"
+                    android:text="@string/painLabelHint"
+                    android:textSize="19sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/painTitleTextView"
+                    app:layout_constraintStart_toEndOf="@+id/painTitleTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/painSelectorContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="1dp"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/painTitleTextView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/submitEvaluationButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableEnd="@drawable/ic_baseline_check_circle"
+                android:padding="16dp"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:background="@drawable/submit_btn_drawable"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/exerciseFatigueContainer"
+                app:layout_constraintWidth_percent="0.7"
+
+                app:spinning_bar_color="#FFF"
+                app:spinning_bar_padding="6dp"
+                app:spinning_bar_width="4dp" />
+
+            <TextView
+                android:id="@+id/errorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/submitEvaluationButton" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/submitEvaluationButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/submit"
-            android:layout_marginTop="32dp"
-            android:drawableEnd="@drawable/ic_baseline_check_circle"
-            android:textColor="@color/white"
-            android:textSize="19sp"
-            android:textStyle="bold"
-            android:padding="16dp"
-            app:backgroundTint="#00757f"
-            app:layout_constraintWidth_percent="0.7"
-            app:layout_constraintTop_toBottomOf="@id/exerciseFatigueContainer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/errorTextView"
-            app:layout_constraintTop_toBottomOf="@id/submitEvaluationButton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 

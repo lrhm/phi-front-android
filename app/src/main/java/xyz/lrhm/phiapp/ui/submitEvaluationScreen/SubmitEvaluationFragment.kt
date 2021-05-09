@@ -1,5 +1,6 @@
 package xyz.lrhm.phiapp.ui.submitEvaluationScreen
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
@@ -13,14 +14,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.setMargins
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexboxLayout
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.R
@@ -68,17 +75,49 @@ class SubmitEvaluationFragment : Fragment() {
 
             Timber.d("assesments are ${exercise.assesments}")
 
-            if(exercise.assesments.isPainEnabled())
+            if (exercise.assesments.isPainEnabled())
                 generatePainSelectors(inflater)
 
-            if(exercise.assesments.isFatigueEnabled())
+            if (exercise.assesments.isFatigueEnabled())
                 generateFatigueSelectors(inflater)
 
-            if(exercise.assesments.isDifficultyEnabled())
+            if (exercise.assesments.isDifficultyEnabled())
                 generateDifficultySelectors(inflater)
 
         }
 
+        binding.submitEvaluationButton.setOnClickListener {
+            if (viewModel.isComplete().not()) {
+                binding.errorTextView.text = "اطلاعات کامل نیست، لطفا مقادیر را انتخواب کنید"
+            } else {
+                binding.errorTextView.text = ""
+                viewModel.sendEvaluations()
+                binding.submitEvaluationButton.startAnimation()
+                lifecycleScope.launch {
+
+                    delay(1000)
+//                    binding.submitEvaluationButton.doneLoadingAnimation(
+//                        Color.GREEN,
+//                        ContextCompat.getDrawable(
+//                            requireContext(),
+//                            R.drawable.ic_baseline_check_circle
+//                        )!!.toBitmap()
+//                    )
+                    binding.submitEvaluationButton.revertAnimation {
+                        binding.submitEvaluationButton.text = "ارصال شد"
+
+                        val drawable = ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.submit_btn_drawable
+                        )!!
+                        DrawableCompat.setTint(drawable, Color.GREEN)
+
+                        binding.submitEvaluationButton.background = drawable
+
+                    }
+                }
+            }
+        }
 
 
 //        (binding.test.drawable as GradientDrawable).setStroke(4, Color.RED)
