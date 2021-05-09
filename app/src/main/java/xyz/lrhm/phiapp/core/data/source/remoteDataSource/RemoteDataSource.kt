@@ -2,6 +2,8 @@ package xyz.lrhm.phiapp.core.data.source.remoteDataSource
 
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.api.Input
+import com.apollographql.apollo.api.toInput
 import com.apollographql.apollo.coroutines.await
 import com.apollographql.apollo.coroutines.toFlow
 import com.apollographql.apollo.exception.ApolloException
@@ -15,8 +17,10 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import xyz.lrhm.APIQuery
 import xyz.lrhm.LoginQuery
+import xyz.lrhm.SubmitEvaluationMutation
 import xyz.lrhm.phiapp.core.data.model.ResultOf
 import xyz.lrhm.phiapp.core.util.CacheUtil
+import xyz.lrhm.type.EvaluationInput
 import java.lang.Exception
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -34,7 +38,6 @@ class RemoteDataSource @Inject constructor(
     suspend fun login(username: String, password: String) = withContext(Dispatchers.IO) {
         val response = try {
 
-//            apolloClient.query(LoginQuery(username,password)).toBuilder().requestHeaders()
             apolloClient.query(LoginQuery(username, password)).await()
         } catch (e: ApolloException) {
             // handle protocol errors
@@ -104,5 +107,38 @@ class RemoteDataSource @Inject constructor(
         return@withContext ResultOf.Success(data)
 
     }
+
+
+    suspend fun submitEvaluation(input: EvaluationInput) = withContext(Dispatchers.IO) {
+
+        val token = cacheUtil.getToken()
+
+        val response = try {
+
+            apolloClient.mutate(SubmitEvaluationMutation(input.toInput()))
+                .toBuilder()
+                .requestHeaders(
+                    RequestHeaders.builder().addHeader("Authorization", token).build()
+                ).build()
+                .await()
+        } catch (e: ApolloException) {
+            // handle protocol errors
+
+
+            Timber.e(e)
+
+            return@withContext ResultOf.Error(e)
+        }
+
+        val data = response.data?.submitEvaluation?.evaluation
+        if (data == null || response.hasErrors()) {
+            // handle application errors
+            Timber.d("${response.errors}")
+            return@withContext ResultOf.Error(Exception("error"))
+        }
+
+        return@withContext ResultOf.Success(data)
+    }
+
 
 }

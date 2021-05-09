@@ -3,12 +3,14 @@ package xyz.lrhm.phiapp.ui.util
 import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import com.apollographql.apollo.api.toInput
 import timber.log.Timber
 import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.databinding.DottedLabelTextBinding
 import xyz.lrhm.phiapp.databinding.ParameterEvaluationItemBinding
 import xyz.lrhm.phiapp.databinding.ParameterEvaluationListBinding
 import xyz.lrhm.phiapp.databinding.ParametersContainerBinding
+import xyz.lrhm.type.ParameterInput
 import xyz.lrhm.type.ParameterType
 import kotlin.math.min
 
@@ -182,3 +184,24 @@ fun  List<APIQuery.Assesment?>?.isValueEnabled(name: String): Boolean {
 fun  List<APIQuery.Assesment?>?.isPainEnabled() = isValueEnabled("pain")
 fun  List<APIQuery.Assesment?>?.isDifficultyEnabled() = isValueEnabled("dificulty")
 fun  List<APIQuery.Assesment?>?.isFatigueEnabled() = isValueEnabled("tiredness")
+
+fun List<APIQuery.Parameter2>.toInput(): MutableList<ParameterInput> {
+    val newList = mutableListOf<ParameterInput>()
+
+    for (item in this){
+
+        newList.add(
+            ParameterInput(
+                item.enabled,
+                item.name,
+                item.title.toInput(),
+                item.value.toInput(),
+                item.secondValue.toInput(),
+                item.valueType.toInput(),
+                item.id.toInput()
+            )
+        )
+    }
+
+    return newList
+}

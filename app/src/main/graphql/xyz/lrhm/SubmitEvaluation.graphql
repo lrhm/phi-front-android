@@ -1,0 +1,44 @@
+mutation SubmitEvaluation($evaluationInput: EvaluationInput) {
+    submitEvaluation(evaluationInput: $evaluationInput) {
+        id
+        updatedAt
+        createdAt
+        date
+        parameters {
+            parameters {
+                id
+                enabled
+                name
+                value
+                secondValue
+                valueType
+                title
+            }
+            exerciseId
+            id
+            enabled
+            additionalInstructions
+        }
+        evaluation {
+            id
+            exerciseId
+            parameters {
+                id
+                enabled
+                name
+                value
+                secondValue
+                valueType
+                title
+            }
+            feedback
+            assesments {
+                id
+                enabled
+                name
+                title
+                value
+            }
+        }
+    }
+}

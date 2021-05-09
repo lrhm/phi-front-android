@@ -13,6 +13,8 @@
     <color name="rowsh_primary_dark">#004a54</color>
     <color name="rowsh_accent">#f8b157</color>
 
+    <color name="success">#4BB543</color>
+
     <color name="colorTextNotSelected">#666666</color>
 <!--    <color name="rowsh_primary">#ff007680</color>-->
 

@@ -67,6 +67,19 @@ class SubmitEvaluationFragment : Fragment() {
 
         viewModel.load(args.exerciseParameterId)
 
+        viewModel.selectedFatigueValue.observe(viewLifecycleOwner){
+            if( viewModel.isComplete())
+                binding.errorTextView.text = ""
+        }
+        viewModel.selectedDifficulty.observe(viewLifecycleOwner){
+            if( viewModel.isComplete())
+                binding.errorTextView.text = ""
+        }
+        viewModel.selectedPainValue.observe(viewLifecycleOwner){
+            if( viewModel.isComplete())
+                binding.errorTextView.text = ""
+        }
+
         viewModel.parameters.observe(viewLifecycleOwner) { params ->
             binding.parameterEvalContainer.bindTo(params, viewModel.parameters)
         }
@@ -91,18 +104,12 @@ class SubmitEvaluationFragment : Fragment() {
                 binding.errorTextView.text = "اطلاعات کامل نیست، لطفا مقادیر را انتخواب کنید"
             } else {
                 binding.errorTextView.text = ""
-                viewModel.sendEvaluations()
+                viewModel.sendEvaluations(args.dayId, binding.feedbackEditText.text.toString())
                 binding.submitEvaluationButton.startAnimation()
                 lifecycleScope.launch {
 
                     delay(1000)
-//                    binding.submitEvaluationButton.doneLoadingAnimation(
-//                        Color.GREEN,
-//                        ContextCompat.getDrawable(
-//                            requireContext(),
-//                            R.drawable.ic_baseline_check_circle
-//                        )!!.toBitmap()
-//                    )
+
                     binding.submitEvaluationButton.revertAnimation {
                         binding.submitEvaluationButton.text = "ارصال شد"
 
@@ -110,7 +117,8 @@ class SubmitEvaluationFragment : Fragment() {
                             requireContext(),
                             R.drawable.submit_btn_drawable
                         )!!
-                        DrawableCompat.setTint(drawable, Color.GREEN)
+                        val color = ContextCompat.getColor(requireContext(), R.color.success)
+                        DrawableCompat.setTint(drawable, color)
 
                         binding.submitEvaluationButton.background = drawable
 
