@@ -49,6 +49,7 @@ class SubmitEvaluationFragment : Fragment() {
 
     val painSelectorList = mutableListOf<PainSelectorItemBinding>()
     val difficultySelectorList = mutableListOf<DifficultySelectorItemBinding>()
+    val fatigueSelectorList = mutableListOf<DifficultySelectorItemBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,8 +69,62 @@ class SubmitEvaluationFragment : Fragment() {
 
         generateDifficultySelectors(inflater)
 
+        generateFatigueSelectors(inflater)
+
 //        (binding.test.drawable as GradientDrawable).setStroke(4, Color.RED)
         return binding.root
+    }
+
+    fun generateFatigueSelectors(inflater: LayoutInflater) {
+        val colorListValues = listOf(
+
+            "#00609d",
+            "#80ac01",
+            "#d2ab10",
+            "#f38607",
+            "#d5393a",
+
+            )
+
+        val labels = listOf(
+            "خیلی آسان",
+            "آسان",
+            "کمی سخت",
+            "سخت",
+            "خیلی سخت"
+        )
+        val size = requireContext().getWidth() * 0.16
+        val margin = size * 0.05
+
+        for (i in 0..4) {
+            val layoutParams = FlexboxLayout.LayoutParams(size.toInt(), size.toInt())
+            layoutParams.setMargins(margin.toInt())
+            val difficultySelector = DifficultySelectorItemBinding.inflate(inflater)
+            fatigueSelectorList.add(difficultySelector)
+
+            binding.fatigueSelectorContainer.addView(difficultySelector.root, layoutParams)
+
+            var valueText = "${i+1}"
+
+
+            difficultySelector.imageView.alpha = 0.35f
+            difficultySelector.imageView.setColorFilter(Color.parseColor(colorListValues[i]))
+            difficultySelector.valueTextView.text = valueText
+            difficultySelector.labelTextView.text = labels[i]
+
+            difficultySelector.root.setOnClickListener {
+
+                val prevSelectedItem = viewModel.selectedFatigueValue.value
+                if (prevSelectedItem != -1) {
+                    fatigueSelectorList[prevSelectedItem!!].imageView.alpha = 0.35f
+                }
+
+                difficultySelector.imageView.alpha = 1.0f
+                viewModel.selectedFatigueValue.value = i
+            }
+
+
+        }
     }
 
     fun generateDifficultySelectors(inflater: LayoutInflater) {
@@ -114,7 +169,7 @@ class SubmitEvaluationFragment : Fragment() {
             binding.difficultySelectorContainer.addView(difficultySelector.root, layoutParams)
 
             var valueText = "$i"
-            if (i == 9){
+            if (i == 9) {
                 valueText = "۹،۱۰"
             }
 
@@ -169,13 +224,17 @@ class SubmitEvaluationFragment : Fragment() {
             painSelector.imageView.setColorFilter(selectedColor)
             painSelector.textView.text = "${i}"
             painSelector.textView.setTextColor(selectedColor)
-            Glide.with(this).load(R.drawable.bordered_circle).into(painSelector.imageView)
+            Glide.with(this).load(R.drawable.bordered_circle).override(
+                imageSize.toInt(), imageSize.toInt()
+            ).into(painSelector.imageView)
 
             painSelector.root.setOnClickListener {
 
                 val prevSelected = viewModel.selectedPainValue.value
                 if (prevSelected != -1) {
-                    Glide.with(this).load(R.drawable.bordered_circle)
+                    Glide.with(this).load(R.drawable.bordered_circle).override(
+                        imageSize.toInt(), imageSize.toInt()
+                    )
                         .into(painSelectorList[prevSelected!!].imageView)
                     painSelectorList[prevSelected!!].textView.setTextColor(
                         Color.parseColor(

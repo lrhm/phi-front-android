@@ -26,4 +26,5 @@
     <string name="exerciseDifficulty">سختی تمرین:</string>
     <string name="pain">درد</string>
     <string name="painLabelHint">: (0: بدون درد ، 10: شدیدترین در ممکن)</string>
+    <string name="fatigue">خستگی</string>
 </resources>
