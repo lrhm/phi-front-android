@@ -75,6 +75,43 @@
             app:layout_constraintTop_toBottomOf="@+id/feedbackTitleTextView" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/exerciseDifficultyContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/painContainer">
+
+            <TextView
+                android:id="@+id/difficultyTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/exerciseDifficulty"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/difficultySelectorContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="1dp"
+                android:layoutDirection="ltr"
+                app:flexDirection="row"
+                app:flexWrap="wrap"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/difficultyTitleTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/painContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -88,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="درد"
+                android:text="@string/pain"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -101,7 +138,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginBottom="1dp"
-                android:text=": (0: بدون درد ، 10: شدیدترین در ممکن)"
+                android:text="@string/painLabelHint"
                 android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="@+id/painTitleTextView"
                 app:layout_constraintStart_toEndOf="@+id/painTitleTextView"
@@ -121,30 +158,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/painTitleTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/test"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_marginTop="32dp"-->
-        <!--            android:src="@drawable/bordered_circle"-->
-        <!--            app:layout_constraintDimensionRatio="1:1"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/parameterEvalContainer"-->
-        <!--            app:layout_constraintWidth_percent="0.095" />-->
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/test2"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_marginTop="32dp"-->
-        <!--            android:src="@drawable/selected_bordered_circle"-->
-        <!--            app:layout_constraintDimensionRatio="1:1"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/test"-->
-        <!--            app:tint="@color/purple_200"-->
-        <!--            app:layout_constraintWidth_percent="0.095" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

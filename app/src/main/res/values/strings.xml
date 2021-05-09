@@ -23,4 +23,7 @@
     <string name="submitExerciseEvaluation">:(میزان تمرین انجام شده را ثبت کنید)</string>
     <string name="submitFeedback">ثبت بازخورد:</string>
     <string name="feedback_hint">اگر در ارتباط با تمرین مشکل داشتید، بنویسید...</string>
+    <string name="exerciseDifficulty">سختی تمرین:</string>
+    <string name="pain">درد</string>
+    <string name="painLabelHint">: (0: بدون درد ، 10: شدیدترین در ممکن)</string>
 </resources>
