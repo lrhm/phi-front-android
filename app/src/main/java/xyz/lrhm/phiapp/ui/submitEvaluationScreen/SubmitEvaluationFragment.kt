@@ -91,13 +91,29 @@ class SubmitEvaluationFragment : Fragment() {
 
 
             val painSelector = PainSelectorItemBinding.inflate(inflater)
+            val selectedColor = Color.parseColor(colorListValues[i])
 
             binding.painSelectorContainer.addView(painSelector.root, layoutParams)
             painSelectorList.add(painSelector)
-            painSelector.imageView.setColorFilter(Color.parseColor(colorListValues[i]))
+            painSelector.imageView.setColorFilter(selectedColor)
             painSelector.textView.text= "${i}"
+            painSelector.textView.setTextColor(selectedColor)
             Glide.with(this).load(R.drawable.bordered_circle).into(painSelector.imageView)
 
+            painSelector.root.setOnClickListener {
+
+                val prevSelected = viewModel.selectedPainValue.value
+                if(prevSelected != -1){
+                    Glide.with(this).load(R.drawable.bordered_circle).into(painSelectorList[prevSelected!!].imageView)
+                    painSelectorList[prevSelected!!].textView.setTextColor(Color.parseColor(colorListValues[prevSelected]))
+                }
+
+                Glide.with(this).load(R.drawable.selected_bordered_circle).into(painSelector.imageView)
+                painSelector.textView.setTextColor(Color.WHITE)
+
+
+                viewModel.selectedPainValue.value = i
+            }
 
         }
 

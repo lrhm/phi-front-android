@@ -56,6 +56,12 @@ class ExerciseScheduleRecyclerViewAdapter(
           val direction=  MobileNavigationDirections.actionGlobalExerciseFragment(exercise.id, item.id, dayId)
             parent.findNavController().navigate(direction)
         }
+
+        holder.binding.submitEvaluationButton.setOnClickListener {
+            val direction = MobileNavigationDirections.actionGlobalSubmitEvaluationFragment(item.id, dayId)
+            parent.findNavController().navigate(direction)
+
+        }
     }
 
     override fun getItemCount(): Int = values.size

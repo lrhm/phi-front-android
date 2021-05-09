@@ -101,7 +101,7 @@ fun ParameterEvaluationListBinding.bindTo(
 
             v.minusButton.setOnClickListener {
 
-                if (param.value != 0) {
+                if (param.value!! > 0) {
                     val newParam = param.copy(value = param.value?.minus(1))
                     val newList = evaluations.toMutableList()
                     newList[i] = newParam
@@ -152,6 +152,9 @@ fun ParameterEvaluationListBinding.bindTo(
                 if (minuts != "" && seconds != "") {
                     text = minuts + " و " + seconds
                 }
+                if(text == "")
+                    text = "0 ثانیه"
+
                 v.valueTextView.text = text
             } else {
                 v.valueTextView.text = "${param.value}"

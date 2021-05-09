@@ -56,7 +56,8 @@
             app:layout_constraintStart_toStartOf="@+id/parameterEvalContainer"
             app:layout_constraintTop_toBottomOf="@+id/parameterEvalContainer" />
 
-        <EditText
+        <xyz.lrhm.phiapp.ui.submitEvaluationScreen.components.ClearFocusEditText
+
             android:id="@+id/feedbackEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -65,10 +66,10 @@
             android:gravity="top"
             android:hint="@string/feedback_hint"
             android:inputType="textMultiLine"
-            android:minHeight="70dp"
-
-            android:minLines="3"
+            android:minLines="2"
             android:textColor="@color/black"
+            android:background="@drawable/rectange_round_bordered_white_bg"
+            android:padding="8dp"
             app:layout_constraintEnd_toEndOf="@+id/parameterEvalContainer"
             app:layout_constraintStart_toStartOf="@+id/feedbackTitleTextView"
             app:layout_constraintTop_toBottomOf="@+id/feedbackTitleTextView" />
@@ -113,8 +114,8 @@
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="1dp"
-                android:orientation="horizontal"
                 android:layoutDirection="ltr"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/painTitleTextView" />
