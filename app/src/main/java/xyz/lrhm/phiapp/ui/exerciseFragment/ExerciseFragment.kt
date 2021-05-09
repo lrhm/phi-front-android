@@ -23,6 +23,7 @@ import xyz.lrhm.phiapp.MobileNavigationDirections
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.FragmentExerciseBinding
 import xyz.lrhm.phiapp.ui.util.bindTo
+import xyz.lrhm.phiapp.ui.util.isExerciseDone
 import javax.inject.Inject
 
 
@@ -53,7 +54,7 @@ class ExerciseFragment : Fragment() {
 
         val exercise = appRepository.getExercise(args.exerciseId)
 
-        val list = exercise.pictures.toMutableList().subList(0, exercise.pictures.size)
+        val list = exercise.pictures.toMutableList().subList(1, exercise.pictures.size)
 //        list.addAll(exercise.pictures)
 //        list.addAll(list)
         val adapter = ExerciseImagesRecyclerViewAdapter(list)
@@ -92,7 +93,31 @@ class ExerciseFragment : Fragment() {
             binding.parametersContainer.root.visibility = View.VISIBLE
             val params = appRepository.getParametersForDay(args.exerciseParameterId!!)!!
 
-//            params.
+            if (args.dayId != null) {
+                val day = appRepository.getScheduleForDay(args.dayId!!)!!
+
+                if (day.isExerciseDone(args.exerciseId)) {
+                    binding.evaluationButton.text = "انجام شد"
+                    binding.evaluationButton.setOnClickListener {
+
+                    }
+
+                } else {
+
+                    binding.evaluationButton.setOnClickListener {
+
+                        val direction =
+                            MobileNavigationDirections.actionGlobalSubmitEvaluationFragment(
+                                args.exerciseParameterId!!,
+                                args.dayId!!
+                            )
+                        findNavController().navigate(direction)
+                    }
+                }
+
+            }
+
+
 
             binding.parametersContainer.bindTo(params.parameters!!)
 
@@ -114,15 +139,7 @@ class ExerciseFragment : Fragment() {
 
 
 
-        binding.evaluationButton.setOnClickListener {
 
-            val direction =
-                MobileNavigationDirections.actionGlobalSubmitEvaluationFragment(
-                    args.exerciseParameterId!!,
-                    args.dayId!!
-                )
-            findNavController().navigate(direction)
-        }
 
         fixPlayerSize(exercise.videos[0]!!)
 

@@ -32,5 +32,7 @@ class ScheduleDayViewModel  @Inject constructor(val appRepository: AppRepository
 
     init {
         setSelectedDate(PersianDate())
+
+
     }
 }

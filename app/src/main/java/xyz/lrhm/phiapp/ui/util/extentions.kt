@@ -4,7 +4,10 @@ import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.api.toInput
+import saman.zamani.persiandate.PersianDate
 import xyz.lrhm.APIQuery
+import xyz.lrhm.phiapp.core.util.getPersianDate
+import xyz.lrhm.phiapp.core.util.isSameDay
 import xyz.lrhm.phiapp.databinding.ParameterEvaluationListBinding
 import xyz.lrhm.phiapp.databinding.ParametersContainerBinding
 import xyz.lrhm.type.ParameterInput
@@ -152,7 +155,7 @@ fun ParameterEvaluationListBinding.bindTo(
                 if (minuts != "" && seconds != "") {
                     text = minuts + " و " + seconds
                 }
-                if(text == "")
+                if (text == "")
                     text = "0 ثانیه"
 
                 v.valueTextView.text = text
@@ -171,22 +174,22 @@ fun Context.getWidth() = resources.displayMetrics.widthPixels
 fun Context.getHeight() = resources.displayMetrics.heightPixels
 
 
-fun  List<APIQuery.Assesment?>?.isValueEnabled(name: String): Boolean {
-    for (item in this!!){
-        if(item?.name == name)
+fun List<APIQuery.Assesment?>?.isValueEnabled(name: String): Boolean {
+    for (item in this!!) {
+        if (item?.name == name)
             return item.enabled
     }
     return false
 }
 
-fun  List<APIQuery.Assesment?>?.isPainEnabled() = isValueEnabled("pain")
-fun  List<APIQuery.Assesment?>?.isDifficultyEnabled() = isValueEnabled("dificulty")
-fun  List<APIQuery.Assesment?>?.isFatigueEnabled() = isValueEnabled("tiredness")
+fun List<APIQuery.Assesment?>?.isPainEnabled() = isValueEnabled("pain")
+fun List<APIQuery.Assesment?>?.isDifficultyEnabled() = isValueEnabled("dificulty")
+fun List<APIQuery.Assesment?>?.isFatigueEnabled() = isValueEnabled("tiredness")
 
 fun List<APIQuery.Parameter3>.toInput(): MutableList<ParameterInput> {
     val newList = mutableListOf<ParameterInput>()
 
-    for (item in this){
+    for (item in this) {
 
         newList.add(
             ParameterInput(
@@ -202,4 +205,25 @@ fun List<APIQuery.Parameter3>.toInput(): MutableList<ParameterInput> {
     }
 
     return newList
+}
+
+fun APIQuery.Day.isExerciseDone(exerciseId: String): Boolean {
+
+    if (this.evaluation != null)
+        for (evaluation in this.evaluation) {
+            if(evaluation?.exerciseId == exerciseId)
+                return true
+        }
+
+    return false
+}
+
+fun APIQuery.Day.isToday(): Boolean{
+    val today = PersianDate()
+    return this.getPersianDate().isSameDay(today)
+}
+
+fun APIQuery.Day.isAfterToday(): Boolean{
+    val today = PersianDate()
+   return getPersianDate().before(today)
 }
