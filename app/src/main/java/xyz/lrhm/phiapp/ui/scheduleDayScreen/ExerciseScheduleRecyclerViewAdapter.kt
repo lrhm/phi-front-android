@@ -13,7 +13,7 @@ import xyz.lrhm.phiapp.ui.util.bindTo
 
 
 class ExerciseScheduleRecyclerViewAdapter(
-    private val values: List<APIQuery.Parameter1?>,
+    private val values: List<APIQuery.Parameter2?>,
     private val exercises: List<APIQuery.Exercise?>,
     private val parent: Fragment,
     private val dayId: String

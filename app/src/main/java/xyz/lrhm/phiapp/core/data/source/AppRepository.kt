@@ -38,7 +38,9 @@ class AppRepository @Inject constructor(
 
 //    fun
 
-    fun getParametersForDay(exerciseParameterId: String): APIQuery.Parameter1? {
+//    fun getEvaluationsF
+
+    fun getParametersForDay(exerciseParameterId: String): APIQuery.Parameter2? {
 
         val days = getCachedAPIRes().patient!!.schedule!!.days!!
         for(day in days){

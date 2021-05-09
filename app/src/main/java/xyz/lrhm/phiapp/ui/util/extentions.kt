@@ -4,18 +4,14 @@ import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.api.toInput
-import timber.log.Timber
 import xyz.lrhm.APIQuery
-import xyz.lrhm.phiapp.databinding.DottedLabelTextBinding
-import xyz.lrhm.phiapp.databinding.ParameterEvaluationItemBinding
 import xyz.lrhm.phiapp.databinding.ParameterEvaluationListBinding
 import xyz.lrhm.phiapp.databinding.ParametersContainerBinding
 import xyz.lrhm.type.ParameterInput
 import xyz.lrhm.type.ParameterType
-import kotlin.math.min
 
 
-fun ParametersContainerBinding.bindTo(parameters: List<APIQuery.Parameter2?>) {
+fun ParametersContainerBinding.bindTo(parameters: List<APIQuery.Parameter3?>) {
 
     val viewLists = listOf(repsPerDay, reps, hold, sets, rest, totalDuration)
 
@@ -81,14 +77,15 @@ fun ParametersContainerBinding.bindToA(parameters: List<APIQuery.Parameter?>) {
 }
 
 fun ParameterEvaluationListBinding.bindTo(
-    evaluations: List<APIQuery.Parameter2>,
-    liveData: MutableLiveData<List<APIQuery.Parameter2>>
+    evaluations: List<APIQuery.Parameter3>,
+    liveData: MutableLiveData<List<APIQuery.Parameter3>>
 ) {
 
 
 //    Timber.d("binding to  parameters in evaluation $evaluations")
 
     val viewLists = mutableListOf(repsPerDay, reps, hold, sets, totalDuration)
+//    val params = evaluations.
 
     for (i in 0 until viewLists.size) {
         val v = viewLists[i]
@@ -100,6 +97,7 @@ fun ParameterEvaluationListBinding.bindTo(
 
 
         if (param.enabled) {
+
 
             v.minusButton.setOnClickListener {
 
@@ -185,7 +183,7 @@ fun  List<APIQuery.Assesment?>?.isPainEnabled() = isValueEnabled("pain")
 fun  List<APIQuery.Assesment?>?.isDifficultyEnabled() = isValueEnabled("dificulty")
 fun  List<APIQuery.Assesment?>?.isFatigueEnabled() = isValueEnabled("tiredness")
 
-fun List<APIQuery.Parameter2>.toInput(): MutableList<ParameterInput> {
+fun List<APIQuery.Parameter3>.toInput(): MutableList<ParameterInput> {
     val newList = mutableListOf<ParameterInput>()
 
     for (item in this){

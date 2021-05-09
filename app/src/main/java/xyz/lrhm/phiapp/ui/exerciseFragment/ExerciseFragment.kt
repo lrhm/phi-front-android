@@ -20,12 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.MobileNavigationDirections
-import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.FragmentExerciseBinding
 import xyz.lrhm.phiapp.ui.util.bindTo
-import xyz.lrhm.phiapp.ui.util.bindToA
-import xyz.lrhm.type.ExerciseType
 import javax.inject.Inject
 
 
@@ -94,6 +91,9 @@ class ExerciseFragment : Fragment() {
             binding.evaluationButton.visibility = View.VISIBLE
             binding.parametersContainer.root.visibility = View.VISIBLE
             val params = appRepository.getParametersForDay(args.exerciseParameterId!!)!!
+
+//            params.
+
             binding.parametersContainer.bindTo(params.parameters!!)
 
             if (params.additionalInstructions != "") {

@@ -23,7 +23,7 @@ class SubmitEvaluationViewModel @Inject constructor(val appRepository: AppReposi
     ViewModel() {
     // TODO: Implement the ViewModel
 
-    val parameters = MutableLiveData<List<APIQuery.Parameter2>>()
+    val parameters = MutableLiveData<List<APIQuery.Parameter3>>()
     val exercise = MutableLiveData<APIQuery.Exercise>()
 
     val selectedPainValue = MutableLiveData(-1)

@@ -81,6 +81,7 @@ class SubmitEvaluationFragment : Fragment() {
         }
 
         viewModel.parameters.observe(viewLifecycleOwner) { params ->
+//            params[0].
             binding.parameterEvalContainer.bindTo(params, viewModel.parameters)
         }
 

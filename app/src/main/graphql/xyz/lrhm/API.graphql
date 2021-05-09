@@ -66,6 +66,28 @@ query API {
           updatedAt
           createdAt
           date
+          evaluation {
+            id
+            exerciseId
+            parameters {
+              id
+              enabled
+              name
+              value
+              secondValue
+              valueType
+              title
+            }
+            feedback
+            assesments {
+              id
+              enabled
+              name
+              title
+              value
+            }
+          }
+
           parameters {
             parameters {
               id
