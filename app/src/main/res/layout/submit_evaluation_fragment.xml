@@ -21,6 +21,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/exerciseFatigueContainer"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -119,6 +120,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/exerciseDifficultyContainer"
+            android:visibility="gone"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -156,6 +159,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/painContainer"
+            android:visibility="gone"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -200,6 +205,36 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/painTitleTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submitEvaluationButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:layout_marginTop="32dp"
+            android:drawableEnd="@drawable/ic_baseline_check_circle"
+            android:textColor="@color/white"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            app:backgroundTint="#00757f"
+            app:layout_constraintWidth_percent="0.7"
+            app:layout_constraintTop_toBottomOf="@id/exerciseFatigueContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/errorTextView"
+            app:layout_constraintTop_toBottomOf="@id/submitEvaluationButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

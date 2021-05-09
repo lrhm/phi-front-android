@@ -169,3 +169,16 @@ fun ParameterEvaluationListBinding.bindTo(
 
 fun Context.getWidth() = resources.displayMetrics.widthPixels
 fun Context.getHeight() = resources.displayMetrics.heightPixels
+
+
+fun  List<APIQuery.Assesment?>?.isValueEnabled(name: String): Boolean {
+    for (item in this!!){
+        if(item?.name == name)
+            return item.enabled
+    }
+    return false
+}
+
+fun  List<APIQuery.Assesment?>?.isPainEnabled() = isValueEnabled("pain")
+fun  List<APIQuery.Assesment?>?.isDifficultyEnabled() = isValueEnabled("dificulty")
+fun  List<APIQuery.Assesment?>?.isFatigueEnabled() = isValueEnabled("tiredness")

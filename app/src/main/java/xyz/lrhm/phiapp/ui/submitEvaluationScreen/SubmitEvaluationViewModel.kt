@@ -13,16 +13,24 @@ class SubmitEvaluationViewModel @Inject constructor(val appRepository: AppReposi
     // TODO: Implement the ViewModel
 
     val parameters = MutableLiveData<List<APIQuery.Parameter2>>()
+    val exercise = MutableLiveData<APIQuery.Exercise>()
+
     val selectedPainValue = MutableLiveData(-1)
     val selectedDifficulty = MutableLiveData(-1)
     val selectedFatigueValue = MutableLiveData(-1)
 
-    fun getParams(exerciseParameterId: String) =
-        appRepository.getParametersForDay(exerciseParameterId)!!.parameters!!.filter {
+
+
+    fun load(exerciseParameterId: String) {
+        val parameter =
+            appRepository.getParametersForDay(exerciseParameterId)!!
+        val params = parameter.parameters!!.filter {
             it?.enabled == true && it?.name.contains("rest") == false
         }.map { it!! }
 
-    fun load(exerciseParameterId: String) {
-        parameters.value = getParams(exerciseParameterId)
+        exercise.value = appRepository.getExercise(parameter.exerciseId!!)
+
+        parameters.value =  params
+
     }
 }

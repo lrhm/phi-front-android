@@ -21,6 +21,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexboxLayout
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.core.data.source.AppRepository
@@ -29,8 +30,7 @@ import xyz.lrhm.phiapp.databinding.PainSelectorItemBinding
 import xyz.lrhm.phiapp.databinding.ParameterEvaluationItemBinding
 import xyz.lrhm.phiapp.databinding.SubmitEvaluationFragmentBinding
 import xyz.lrhm.phiapp.ui.scheduleDayScreen.ScheduleDayViewModel
-import xyz.lrhm.phiapp.ui.util.bindTo
-import xyz.lrhm.phiapp.ui.util.getWidth
+import xyz.lrhm.phiapp.ui.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -62,20 +62,34 @@ class SubmitEvaluationFragment : Fragment() {
 
         viewModel.parameters.observe(viewLifecycleOwner) { params ->
             binding.parameterEvalContainer.bindTo(params, viewModel.parameters)
+        }
+
+        viewModel.exercise.observe(viewLifecycleOwner) { exercise ->
+
+            Timber.d("assesments are ${exercise.assesments}")
+
+            if(exercise.assesments.isPainEnabled())
+                generatePainSelectors(inflater)
+
+            if(exercise.assesments.isFatigueEnabled())
+                generateFatigueSelectors(inflater)
+
+            if(exercise.assesments.isDifficultyEnabled())
+                generateDifficultySelectors(inflater)
 
         }
 
-        generatePainSelectors(inflater)
 
-        generateDifficultySelectors(inflater)
-
-        generateFatigueSelectors(inflater)
 
 //        (binding.test.drawable as GradientDrawable).setStroke(4, Color.RED)
         return binding.root
     }
 
     fun generateFatigueSelectors(inflater: LayoutInflater) {
+        Timber.d("generate fatigue selectors")
+
+        binding.exerciseFatigueContainer.visibility = View.VISIBLE
+
         val colorListValues = listOf(
 
             "#00609d",
@@ -104,7 +118,7 @@ class SubmitEvaluationFragment : Fragment() {
 
             binding.fatigueSelectorContainer.addView(difficultySelector.root, layoutParams)
 
-            var valueText = "${i+1}"
+            var valueText = "${i + 1}"
 
 
             difficultySelector.imageView.alpha = 0.35f
@@ -129,6 +143,7 @@ class SubmitEvaluationFragment : Fragment() {
 
     fun generateDifficultySelectors(inflater: LayoutInflater) {
 
+        binding.exerciseDifficultyContainer.visibility = View.VISIBLE
         val colorListValues = listOf(
 
             "#0164a5",
@@ -195,6 +210,8 @@ class SubmitEvaluationFragment : Fragment() {
     }
 
     fun generatePainSelectors(inflater: LayoutInflater) {
+
+        binding.painContainer.visibility = View.VISIBLE
         val colorListValues = listOf(
             "#2d437c",
             "#27866a",
