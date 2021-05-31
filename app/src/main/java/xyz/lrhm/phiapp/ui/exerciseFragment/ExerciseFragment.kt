@@ -55,6 +55,7 @@ class ExerciseFragment : Fragment() {
         val exercise = appRepository.getExercise(args.exerciseId)
 
         val list = exercise.pictures.toMutableList().subList(1, exercise.pictures.size)
+        list
 //        list.addAll(exercise.pictures)
 //        list.addAll(list)
         val adapter = ExerciseImagesRecyclerViewAdapter(list)
@@ -141,12 +142,12 @@ class ExerciseFragment : Fragment() {
 
 
 
-        fixPlayerSize(exercise.videos[0]!!)
+        fixPlayerSize(list[0]!!)
 
         return binding.root
     }
 
-    fun fixPlayerSize(video: APIQuery.Video) {
+    fun fixPlayerSize(video: APIQuery.Picture) {
         val width = requireContext().resources.displayMetrics.widthPixels * 0.9
 
         val height = (width / video.width!!) * video.height!!

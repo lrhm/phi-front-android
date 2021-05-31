@@ -23,6 +23,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class ApolloModule {
 
+    private val url = "http://195.211.44.105:4000"
 
     @Provides
     @Singleton
@@ -63,7 +64,7 @@ class ApolloModule {
     @Provides
     @Singleton
     fun providesApolloClient(normalizedCache: NormalizedCacheFactory<LruNormalizedCache>, cacheKeyResolver: CacheKeyResolver) = ApolloClient.builder()
-        .serverUrl("http://192.168.2.5:4000")
+        .serverUrl(url)
         .normalizedCache(normalizedCache, cacheKeyResolver)
         .build()
 

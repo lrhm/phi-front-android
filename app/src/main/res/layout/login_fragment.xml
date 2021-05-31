@@ -1,18 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.loginScreen.LoginFragment"
     android:id="@+id/frameLayout">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_baseline_login_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22000003"
+        app:layout_constraintWidth_percent="0.24"
+        tools:layout_constraintDimensionRatio="1:1" />
+
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello"
-        tools:layout_conversion_absoluteHeight="731dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_conversion_absoluteWidth="411dp" />
+        android:layout_marginTop="24dp"
+        android:text="خوش آمدید!"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userNameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintWidth_percent="0.8"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:placeholderText="test"
+        android:hint="نام کاربری"
+
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userNameLayout"
+        app:layout_constraintWidth_percent="0.8"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:placeholderText="test"
+        android:hint="رمز عبور"
+
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="ورود"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

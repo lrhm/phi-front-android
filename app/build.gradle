@@ -62,9 +62,9 @@ hilt {
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:1.3.2"
+    implementation "androidx.core:core-ktx:1.5.0"
 
-    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation "androidx.appcompat:appcompat:1.3.0"
     implementation "com.google.android.material:material:1.3.0"
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
@@ -89,15 +89,15 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
 
 
-    implementation "com.github.bumptech.glide:glide:4.11.0"
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
     // Skip this if you don"t want to use integration libraries or configure Glide.
-    kapt "com.github.bumptech.glide:compiler:4.11.0"
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     implementation "com.github.samanzamani.persiandate:PersianDate:0.8"
 
     implementation "com.jakewharton.timber:timber:4.7.1"
 
-    implementation 'com.google.android.exoplayer:exoplayer:2.13.3'
+    implementation 'com.google.android.exoplayer:exoplayer:2.14.0'
 
     implementation "androidx.multidex:multidex:$multidexVersion"
 
@@ -106,6 +106,8 @@ dependencies {
     implementation   'com.danikula:videocache:2.7.1'
 
     implementation 'br.com.simplepass:loading-button-android:2.2.0'
+
+    implementation 'com.google.android.material:material:1.3.0'
     
     testImplementation "junit:junit:4.+"
     androidTestImplementation "androidx.test.ext:junit:1.1.2"

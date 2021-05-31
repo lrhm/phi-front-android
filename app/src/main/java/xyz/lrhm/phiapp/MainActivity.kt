@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         arguments: Bundle?
     ) {
 
-        if (destination.id == R.id.splashFragment) {
+        if (destination.id == R.id.splashFragment || destination.id == R.id.loginFragment) {
 
             binding.mainLayout.appBar.visibility = View.GONE
         } else {
