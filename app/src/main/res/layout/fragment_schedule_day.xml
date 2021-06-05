@@ -1,55 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-
-    </data>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.scheduleDayScreen.ScheduleDayFragment">
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/todayButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="امروز"
-            android:textColor="?attr/colorPrimary"
-            android:textStyle="bold"
-            android:background="@drawable/rectange_bordered_white_bg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.3" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/prevDayButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00FFFFFF"
-            android:drawableStart="@drawable/ic_baseline_arrow_forward"
-            android:text="روز قبل"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/todayButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/todayButton" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/nextDayButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00FFFFFF"
-            android:drawableEnd="@drawable/ic_baseline_arrow_back"
-            android:text="روز بعد"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/todayButton"
-            app:layout_constraintTop_toTopOf="@+id/todayButton" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -84,17 +42,6 @@
             app:layout_constraintStart_toEndOf="@+id/dateBoldText"
             app:layout_constraintTop_toTopOf="@+id/dateBoldText" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateBoldText"
-            app:layout_constraintVertical_bias="0.0" />
-
         <TextView
             android:id="@+id/noExerciseTextView"
             android:layout_width="wrap_content"
@@ -107,5 +54,94 @@
             app:layout_constraintTop_toBottomOf="@+id/dateBoldText"
             tools:textSize="24sp"
             tools:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/prevDayButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:drawableStart="@drawable/ic_baseline_arrow_forward"
+            android:text="روز قبل"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/todayButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/todayButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/nextDayButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:drawableEnd="@drawable/ic_baseline_arrow_back"
+            android:text="روز بعد"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/todayButton"
+            app:layout_constraintTop_toTopOf="@+id/todayButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/todayButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/rectange_bordered_white_bg"
+            android:text="امروز"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateTextView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/evalutioanButton"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_corners"
+                    android:drawableEnd="@drawable/ic_baseline_check_box_24"
+                    android:drawablePadding="8dp"
+                    android:paddingHorizontal="32dp"
+                    android:paddingVertical="4dp"
+                    android:text="@string/evaluation"
+                    android:textSize="18sp"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:overScrollMode="never"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/evalutioanButton"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+    </data>
 </layout>

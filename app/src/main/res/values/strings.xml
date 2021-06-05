@@ -28,4 +28,5 @@
     <string name="painLabelHint">: (0: بدون درد ، 10: شدیدترین در ممکن)</string>
     <string name="fatigue">خستگی</string>
     <string name="submit">ثبت</string>
+    <string name="evaluation">ارزیابی</string>
 </resources>
