@@ -27,7 +27,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel.login("test", "test")
+//        viewModel.login("test", "test")
 
        binding = LoginFragmentBinding.inflate(inflater , container, false)
 
