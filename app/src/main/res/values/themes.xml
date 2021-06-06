@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.PhiApp" parent="Theme.MaterialComponents.Light">
         <!-- Primary brand color. -->
+        <item name="android:fontFamily">@font/irsansz</item>
         <item name="colorPrimary">@color/rowsh_primary</item>
         <item name="colorPrimaryVariant">@color/rowsh_primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>

@@ -1,5 +1,6 @@
 package xyz.lrhm.phiapp.ui.scheduleDayScreen
 
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +13,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 import timber.log.Timber
+import xyz.lrhm.phiapp.core.util.englishToPersian
 import xyz.lrhm.phiapp.core.util.isSameDay
+import xyz.lrhm.phiapp.core.util.setPersianTextHelper
 import xyz.lrhm.phiapp.databinding.FragmentScheduleDayBinding
 
 @AndroidEntryPoint
@@ -35,6 +38,14 @@ class ScheduleDayFragment : Fragment() {
         binding = FragmentScheduleDayBinding.inflate(inflater, container, false)
 
         observeLiveDatas()
+
+//        binding.dateTextView.setPersianTextHelper()
+
+//        binding.dateTextView.typeface =
+//            Typeface.createFromAsset(requireActivity().assets, "irsansz.ttf");
+//
+//        binding.dateBoldText.typeface =
+//            Typeface.createFromAsset(requireActivity().assets, "irsansz.ttf");
 
         binding.nextDayButton.setOnClickListener {
             val pDate = PersianDate(viewModel.selectedDate.value!!.toDate())
@@ -59,6 +70,7 @@ class ScheduleDayFragment : Fragment() {
         viewModel.selectedDate.observe(viewLifecycleOwner) {
             if (today.isSameDay(it)) {
                 binding.dateBoldText.text = "امروز" + " " + it.dayName() + " "
+
                 binding.todayButton.text = "امروز"
                 binding.todayButton.setOnClickListener {
 
