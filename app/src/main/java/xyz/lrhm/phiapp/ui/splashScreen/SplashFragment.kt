@@ -44,9 +44,9 @@ class SplashFragment : Fragment() {
 
         lifecycleScope.launch {
             delay(500)
-            if(!appRepository.isLoggedIn())
-            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-            else{
+            if (!appRepository.isLoggedIn())
+                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+            else {
                 lifecycleScope.launch {
 
                     val user = appRepository.remoteDataSource.getUser()
@@ -54,7 +54,6 @@ class SplashFragment : Fragment() {
                     Timber.d("user iz $user")
                     findNavController().navigate(R.id.action_global_scheduleDayFragment2)
 //                    findNavController().navigate(R.id.action_splashFragment_to_exerciseGalleryFragment)
-
 
 
                 }

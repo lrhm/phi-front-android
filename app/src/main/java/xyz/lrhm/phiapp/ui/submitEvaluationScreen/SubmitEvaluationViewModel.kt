@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.lrhm.APIQuery
 import xyz.lrhm.SubmitEvaluationMutation
+import xyz.lrhm.phiapp.core.data.model.ResultOf
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.ui.util.isDifficultyEnabled
 import xyz.lrhm.phiapp.ui.util.isFatigueEnabled
@@ -30,6 +31,8 @@ class SubmitEvaluationViewModel @Inject constructor(val appRepository: AppReposi
     val selectedDifficulty = MutableLiveData(-1)
     val selectedFatigueValue = MutableLiveData(-1)
 
+    val result = MutableLiveData<ResultOf<List<SubmitEvaluationMutation.Evaluation?>>>()
+
 
     fun load(exerciseParameterId: String) {
         val parameter =
@@ -48,7 +51,7 @@ class SubmitEvaluationViewModel @Inject constructor(val appRepository: AppReposi
         var res = mutableListOf<AssesmentInput>()
         val exerciseAssesment = exercise.value!!.assesments!!
 
-        if(isPainEnabled()){
+        if (isPainEnabled()) {
             res.add(
                 AssesmentInput(
                     true,
@@ -59,7 +62,7 @@ class SubmitEvaluationViewModel @Inject constructor(val appRepository: AppReposi
             )
         }
 
-        if(isDifficultyEnabled()){
+        if (isDifficultyEnabled()) {
             res.add(
                 AssesmentInput(
                     true,
@@ -69,7 +72,7 @@ class SubmitEvaluationViewModel @Inject constructor(val appRepository: AppReposi
                 )
             )
         }
-        if(isFatigueEnabled()){
+        if (isFatigueEnabled()) {
             res.add(
                 AssesmentInput(
                     true,
@@ -99,7 +102,7 @@ class SubmitEvaluationViewModel @Inject constructor(val appRepository: AppReposi
         return true
     }
 
-    fun sendEvaluations(dayId: String, feedback: String){
+    fun sendEvaluations(dayId: String, feedback: String) {
         val input = EvaluationInput(
             dayId,
             exercise.value!!.id,
@@ -110,8 +113,9 @@ class SubmitEvaluationViewModel @Inject constructor(val appRepository: AppReposi
         )
 
         viewModelScope.launch {
-          val res=  appRepository.remoteDataSource.submitEvaluation(input)
+            val res = appRepository.remoteDataSource.submitEvaluation(input)
 
+            result.postValue(res)
 
             Timber.d("API SUBMIT RES IZ ${res}")
         }

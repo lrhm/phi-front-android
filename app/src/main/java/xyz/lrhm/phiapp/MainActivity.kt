@@ -21,10 +21,13 @@ import com.apollographql.apollo.coroutines.await
 import com.apollographql.apollo.exception.ApolloException
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.lrhm.LoginQuery
+import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
@@ -32,6 +35,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+
+    @Inject
+    lateinit var appRepository: AppRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +67,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         navController.addOnDestinationChangedListener(this)
 
-        binding.mainLayout.bottomNavigationView.setOnNavigationItemSelectedListener { item->
+        binding.mainLayout.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navBottomEducationalItem -> {
                     Timber.d("clicked education")
@@ -130,12 +136,22 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         }
 
         if (destination.id == R.id.exerciseGalleryFragment ||
-                destination.id == R.id.scheduleDayFragment
-                ) {
+            destination.id == R.id.scheduleDayFragment
+        ) {
             binding.mainLayout.bottomNavigationView.visibility = View.VISIBLE
         } else {
             binding.mainLayout.bottomNavigationView.visibility = View.GONE
 
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        lifecycleScope.launchWhenResumed {
+
+            delay(1000)
+            appRepository.remoteDataSource.getUser()
         }
     }
 }

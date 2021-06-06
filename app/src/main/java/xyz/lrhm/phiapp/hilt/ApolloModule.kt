@@ -23,7 +23,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class ApolloModule {
 
-    private val url = "http://195.211.44.105:4000"
+//    private val url = "http://195.211.44.105:4000"
+
+    private val url = "http://192.168.2.6:4000"
 
     @Provides
     @Singleton

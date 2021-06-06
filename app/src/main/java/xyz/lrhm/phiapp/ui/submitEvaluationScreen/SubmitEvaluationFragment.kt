@@ -31,6 +31,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.R
+import xyz.lrhm.phiapp.core.data.model.ResultOf
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.DifficultySelectorItemBinding
 import xyz.lrhm.phiapp.databinding.PainSelectorItemBinding
@@ -67,16 +68,16 @@ class SubmitEvaluationFragment : Fragment() {
 
         viewModel.load(args.exerciseParameterId)
 
-        viewModel.selectedFatigueValue.observe(viewLifecycleOwner){
-            if( viewModel.isComplete())
+        viewModel.selectedFatigueValue.observe(viewLifecycleOwner) {
+            if (viewModel.isComplete())
                 binding.errorTextView.text = ""
         }
-        viewModel.selectedDifficulty.observe(viewLifecycleOwner){
-            if( viewModel.isComplete())
+        viewModel.selectedDifficulty.observe(viewLifecycleOwner) {
+            if (viewModel.isComplete())
                 binding.errorTextView.text = ""
         }
-        viewModel.selectedPainValue.observe(viewLifecycleOwner){
-            if( viewModel.isComplete())
+        viewModel.selectedPainValue.observe(viewLifecycleOwner) {
+            if (viewModel.isComplete())
                 binding.errorTextView.text = ""
         }
 
@@ -100,6 +101,33 @@ class SubmitEvaluationFragment : Fragment() {
 
         }
 
+        viewModel.result.observe(viewLifecycleOwner) {
+
+            Timber.d("result is ${it}")
+            if (it is ResultOf.Error) {
+                binding.errorTextView.text = "خطا رخ داده است، از اتصال به اینترنت مطمئن شوید."
+                binding.submitEvaluationButton.revertAnimation {
+
+                }
+
+            }
+            else{
+                binding.submitEvaluationButton.revertAnimation {
+                    binding.submitEvaluationButton.text = "ارسال شد"
+
+                    val drawable = ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.submit_btn_drawable
+                    )!!
+                    val color = ContextCompat.getColor(requireContext(), R.color.success)
+                    DrawableCompat.setTint(drawable, color)
+
+                    binding.submitEvaluationButton.background = drawable
+
+                }
+            }
+        }
+
         binding.submitEvaluationButton.setOnClickListener {
             if (viewModel.isComplete().not()) {
                 binding.errorTextView.text = "اطلاعات کامل نیست، لطفا مقادیر را انتخواب کنید"
@@ -107,24 +135,7 @@ class SubmitEvaluationFragment : Fragment() {
                 binding.errorTextView.text = ""
                 viewModel.sendEvaluations(args.dayId, binding.feedbackEditText.text.toString())
                 binding.submitEvaluationButton.startAnimation()
-                lifecycleScope.launch {
 
-                    delay(1000)
-
-                    binding.submitEvaluationButton.revertAnimation {
-                        binding.submitEvaluationButton.text = "ارصال شد"
-
-                        val drawable = ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.submit_btn_drawable
-                        )!!
-                        val color = ContextCompat.getColor(requireContext(), R.color.success)
-                        DrawableCompat.setTint(drawable, color)
-
-                        binding.submitEvaluationButton.background = drawable
-
-                    }
-                }
             }
         }
 
