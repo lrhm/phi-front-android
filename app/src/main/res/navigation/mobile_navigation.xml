@@ -79,4 +79,15 @@
         android:id="@+id/action_global_submitEvaluationFragment"
         app:destination="@id/submitEvaluationFragment"
         app:launchSingleTop="true" />
+    <fragment
+        android:id="@+id/questionnaireSelectScreen"
+        android:name="xyz.lrhm.phiapp.ui.questionareScreen.QuestionnaireSelectScreen"
+        android:label="@string/evaluation" >
+        <argument
+            android:name="dayId"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_questionnaireSelectScreen"
+        app:destination="@id/questionnaireSelectScreen" />
 </navigation>

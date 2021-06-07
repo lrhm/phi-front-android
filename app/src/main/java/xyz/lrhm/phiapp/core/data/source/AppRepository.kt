@@ -15,7 +15,8 @@ class AppRepository @Inject constructor(
     val cacheUtil: CacheUtil
 ) {
 
-    suspend fun doLogin(username: String, password: String) = remoteDataSource.login(username, password)
+    suspend fun doLogin(username: String, password: String) =
+        remoteDataSource.login(username, password)
 
 //    var user: APIQuery.User? = null
 
@@ -40,13 +41,24 @@ class AppRepository @Inject constructor(
 
 //    fun getEvaluationsF
 
+    fun getQuestionnairesForDay(dayId: String): List<APIQuery.Questionare?>? {
+        val days = getCachedAPIRes().patient!!.schedule!!.days!!
+        for (day in days) {
+
+            if (day?.id == dayId)
+                return day.questionares
+        }
+
+        return emptyList()
+    }
+
     fun getParametersForDay(exerciseParameterId: String): APIQuery.Parameter2? {
 
         val days = getCachedAPIRes().patient!!.schedule!!.days!!
-        for(day in days){
+        for (day in days) {
 
-            for(param in day?.parameters!!){
-                if(param?.id == exerciseParameterId)
+            for (param in day?.parameters!!) {
+                if (param?.id == exerciseParameterId)
                     return param
             }
         }
@@ -55,21 +67,24 @@ class AppRepository @Inject constructor(
 
     }
 
-    fun getScheduleForDay(dayId: String): APIQuery.Day?{
+    fun getScheduleForDay(dayId: String): APIQuery.Day? {
         val user = getCachedAPIRes()
 
         return user.patient?.schedule?.days?.find { it?.id == dayId }
     }
-    fun getScheduleForDay(date: PersianDate): APIQuery.Day?{
+
+    fun getScheduleForDay(date: PersianDate): APIQuery.Day? {
         val user = getCachedAPIRes()
 
         user.patient?.schedule?.days.apply {
-            if(this != null)
-                for (day in this){
+            if (this != null)
+                for (day in this) {
 
-                    val pDate = day!!.getPersianDate()
-                    if(pDate.isSameDay(date))
-                        return day
+                    if (day != null) {
+                        val pDate = day!!.getPersianDate()
+                        if (pDate.isSameDay(date))
+                            return day
+                    }
 
                 }
         }

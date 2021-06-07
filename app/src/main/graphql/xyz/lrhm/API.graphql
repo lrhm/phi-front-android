@@ -66,6 +66,29 @@ query API {
           updatedAt
           createdAt
           date
+          questionareIds
+          questionares{
+            id
+            title
+            answered
+            questions{
+                order
+                id
+                answerType
+                question
+                options{
+                    order
+                    id
+                    value
+                }
+            }
+            answers{
+                id
+                questionId
+                answeredOptionId
+                answerStr
+            }
+          }
           evaluation {
             id
             exerciseId

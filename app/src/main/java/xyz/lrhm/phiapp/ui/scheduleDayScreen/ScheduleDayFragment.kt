@@ -1,21 +1,21 @@
 package xyz.lrhm.phiapp.ui.scheduleDayScreen
 
-import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 import timber.log.Timber
-import xyz.lrhm.phiapp.core.util.englishToPersian
+import xyz.lrhm.APIQuery
+import xyz.lrhm.phiapp.MobileNavigationDirections
 import xyz.lrhm.phiapp.core.util.isSameDay
-import xyz.lrhm.phiapp.core.util.setPersianTextHelper
 import xyz.lrhm.phiapp.databinding.FragmentScheduleDayBinding
 
 @AndroidEntryPoint
@@ -90,10 +90,11 @@ class ScheduleDayFragment : Fragment() {
 
             Timber.d("day is ${day}")
             if (day == null) {
-
+                binding.evalutioanButton.visibility = View.GONE
                 setRestDay(true)
             } else {
                 val enabledList = day.parameters!!.filter { it!!.enabled == true }
+                initQuestionnareSection(day!!)
 
                 if (enabledList.isEmpty()) {
 
@@ -118,6 +119,26 @@ class ScheduleDayFragment : Fragment() {
 
             }
 
+        }
+
+    }
+
+    fun initQuestionnareSection(day: APIQuery.Day) {
+
+        val questionares = viewModel.getQuestionnairesForDayId(day.id)
+
+        Timber.d("questionares are ${questionares}")
+        if(questionares.isEmpty()){
+            binding.evalutioanButton.visibility = View.GONE
+        }else{
+            binding.evalutioanButton.visibility = View.VISIBLE
+
+            binding.evalutioanButton.setOnClickListener {
+                val args = MobileNavigationDirections.actionGlobalQuestionnaireSelectScreen(
+                    viewModel.selectedDay.value!!.id
+                )
+                findNavController().navigate(args)
+            }
         }
     }
 

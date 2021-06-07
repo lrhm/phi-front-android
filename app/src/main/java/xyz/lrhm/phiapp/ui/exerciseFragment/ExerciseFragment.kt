@@ -23,6 +23,7 @@ import xyz.lrhm.phiapp.MobileNavigationDirections
 import xyz.lrhm.phiapp.core.data.source.AppRepository
 import xyz.lrhm.phiapp.databinding.FragmentExerciseBinding
 import xyz.lrhm.phiapp.ui.util.bindTo
+import xyz.lrhm.phiapp.ui.util.isAfterToday
 import xyz.lrhm.phiapp.ui.util.isExerciseDone
 import javax.inject.Inject
 
@@ -55,7 +56,7 @@ class ExerciseFragment : Fragment() {
         val exercise = appRepository.getExercise(args.exerciseId)
 
         val list = exercise.pictures.toMutableList().subList(1, exercise.pictures.size)
-        list
+
 //        list.addAll(exercise.pictures)
 //        list.addAll(list)
         val adapter = ExerciseImagesRecyclerViewAdapter(list)
@@ -79,7 +80,7 @@ class ExerciseFragment : Fragment() {
                 toggleViews()
         }
 
-        initExoPlayer(exercise.videos[0]!!.url.replace("localhost", "192.168.2.5"))
+        initExoPlayer(exercise.videos[0]!!.url )
 
 //        toggleViews()
 
@@ -96,6 +97,9 @@ class ExerciseFragment : Fragment() {
 
             if (args.dayId != null) {
                 val day = appRepository.getScheduleForDay(args.dayId!!)!!
+                if(day.isAfterToday()){
+                    binding.evaluationButton.visibility = View.GONE
+                }
 
                 if (day.isExerciseDone(args.exerciseId)) {
                     binding.evaluationButton.text = "انجام شد"

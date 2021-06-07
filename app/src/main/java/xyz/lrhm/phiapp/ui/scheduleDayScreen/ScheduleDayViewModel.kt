@@ -22,6 +22,14 @@ class ScheduleDayViewModel  @Inject constructor(val appRepository: AppRepository
         return appRepository.getScheduleForDay(selectedDate.value!!)
     }
 
+    fun getQuestionnairesForDayId(id: String = selectedDay.value!!.id): List<APIQuery.Questionare?> {
+
+
+        return appRepository.getQuestionnairesForDay(id)!!
+    }
+
+
+
     fun setSelectedDate(date: PersianDate){
 
         selectedDate.value = date
