@@ -6,33 +6,36 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.MobileNavigationDirections
+import xyz.lrhm.phiapp.databinding.QuestionAnswerItemBinding
 import xyz.lrhm.phiapp.databinding.QuestionnaireSelectItemBinding
 import xyz.lrhm.phiapp.databinding.ScheduleExerciseItemBinding
 import xyz.lrhm.phiapp.ui.util.bindTo
 import xyz.lrhm.phiapp.ui.util.isAfterToday
 import xyz.lrhm.phiapp.ui.util.isExerciseDone
 import xyz.lrhm.phiapp.ui.util.isToday
+import xyz.lrhm.type.QuestionAnswerType
 
 
-class QuestionnaireSelectRecyclerViewAdapter(
-    val dayId: String,
-    private val values: List<APIQuery.Questionare?>,
+class QuestionnaireRecyclerViewAdapter(
+    private val values: List<APIQuery.Question?>,
     private val parent: Fragment,
 
-    ) : RecyclerView.Adapter<QuestionnaireSelectRecyclerViewAdapter.ViewHolder>() {
+    ) : RecyclerView.Adapter<QuestionnaireRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val holder = ViewHolder(
-            QuestionnaireSelectItemBinding.inflate(
+            QuestionAnswerItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
         )
+        holder.setIsRecyclable(false)
 
 //        val width = parent.context.resources.displayMetrics.widthPixels * 0.3
 //        holder.binding.imageView.layoutParams.width = width.toInt()
@@ -45,21 +48,32 @@ class QuestionnaireSelectRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]!!
 
-        holder.binding.titleTextView.text = item.title
+        holder.binding.questionTextView.text = item.question
 
-        holder.binding.root.setOnClickListener {
-
-            val args = MobileNavigationDirections.actionGlobalQuestionnaireAnswerScreen(
-                dayId,
-                item.id
+        holder.binding.recyclerView.layoutManager = LinearLayoutManager(
+            parent.requireContext()
+        )
+        if (item.answerType == QuestionAnswerType.OPTIONS)
+            holder.binding.recyclerView.adapter = QuestionnaireAnswerRecyclerViewAdapter(
+                item.options!!, parent
             )
-            parent.findNavController().navigate(args)
+        else{
+            holder.binding.recyclerView.visibility = View.GONE
+            holder.binding.answerEditText.visibility = View.VISIBLE
         }
+//        holder.binding.root.setOnClickListener {
+//
+//            val args = MobileNavigationDirections.actionGlobalQuestionnaireAnswerScreen(
+//                dayId,
+//                item.id
+//            )
+//            parent.findNavController().navigate(args)
+//        }
     }
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(val binding: QuestionnaireSelectItemBinding) :
+    inner class ViewHolder(val binding: QuestionAnswerItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 

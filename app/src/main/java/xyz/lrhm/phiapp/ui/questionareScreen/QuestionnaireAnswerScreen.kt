@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import xyz.lrhm.phiapp.MainActivity
 import xyz.lrhm.phiapp.R
 import xyz.lrhm.phiapp.databinding.FragmentQuestionareSelectScreenBinding
 import xyz.lrhm.phiapp.ui.scheduleDayScreen.ExerciseScheduleRecyclerViewAdapter
@@ -18,12 +19,12 @@ import xyz.lrhm.phiapp.ui.submitEvaluationScreen.SubmitEvaluationFragmentArgs
 
 
 @AndroidEntryPoint
-class QuestionnaireSelectScreen : Fragment() {
+class QuestionnaireAnswerScreen : Fragment() {
 
 
     lateinit var binding: FragmentQuestionareSelectScreenBinding
     val viewModel: QuestionnaireViewModel by viewModels({ requireActivity() })
-    val args by navArgs<QuestionnaireSelectScreenArgs>()
+    val args by navArgs<QuestionnaireAnswerScreenArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,20 +33,30 @@ class QuestionnaireSelectScreen : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentQuestionareSelectScreenBinding.inflate(inflater, container, false)
 
-        viewModel.loadForDay(args.dayId)
+        binding.helperTextView.visibility = View.GONE
 
+        val questionnaire = viewModel.getQuestionnaireForId(args.questionnaireId)
+
+//        requireActivity().title = questionnaire.title
+
+        (requireActivity() as MainActivity).supportActionBar?.title = questionnaire.title
+        activity?.title = questionnaire.title
 
         with(binding.recyclerView) {
             layoutManager = LinearLayoutManager(context)
-
-            val list = viewModel.getQuestionnairesForDayId(args.dayId)
-
-            adapter = QuestionnaireSelectRecyclerViewAdapter(
-                args.dayId,
-                list,
-             this@QuestionnaireSelectScreen,
-
+            adapter = QuestionnaireRecyclerViewAdapter(
+                questionnaire.questions!!,
+                this@QuestionnaireAnswerScreen
             )
+
+
+//            val list = viewModel.getQuestionnairesForDayId(args.dayId)
+//
+//            adapter = QuestionnaireSelectRecyclerViewAdapter(
+//                list,
+//             this@QuestionnaireAnswerScreen,
+//
+//            )
 
         }
 

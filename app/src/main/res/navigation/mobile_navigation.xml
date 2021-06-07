@@ -90,4 +90,18 @@
     <action
         android:id="@+id/action_global_questionnaireSelectScreen"
         app:destination="@id/questionnaireSelectScreen" />
+    <fragment
+        android:id="@+id/questionnaireAnswerScreen"
+        android:name="xyz.lrhm.phiapp.ui.questionareScreen.QuestionnaireAnswerScreen"
+        android:label="QuestionnaireAnswerScreen" >
+        <argument
+            android:name="dayId"
+            app:argType="string" />
+        <argument
+            android:name="questionnaireId"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_questionnaireAnswerScreen"
+        app:destination="@id/questionnaireAnswerScreen" />
 </navigation>

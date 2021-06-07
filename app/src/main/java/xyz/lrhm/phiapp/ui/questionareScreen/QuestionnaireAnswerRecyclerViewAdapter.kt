@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import xyz.lrhm.APIQuery
 import xyz.lrhm.phiapp.MobileNavigationDirections
+import xyz.lrhm.phiapp.databinding.AnswerSelectorItemBinding
 import xyz.lrhm.phiapp.databinding.QuestionnaireSelectItemBinding
 import xyz.lrhm.phiapp.databinding.ScheduleExerciseItemBinding
 import xyz.lrhm.phiapp.ui.util.bindTo
@@ -17,17 +18,16 @@ import xyz.lrhm.phiapp.ui.util.isExerciseDone
 import xyz.lrhm.phiapp.ui.util.isToday
 
 
-class QuestionnaireSelectRecyclerViewAdapter(
-    val dayId: String,
-    private val values: List<APIQuery.Questionare?>,
+class QuestionnaireAnswerRecyclerViewAdapter(
+    private val values: List<APIQuery.Option?>,
     private val parent: Fragment,
 
-    ) : RecyclerView.Adapter<QuestionnaireSelectRecyclerViewAdapter.ViewHolder>() {
+    ) : RecyclerView.Adapter<QuestionnaireAnswerRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val holder = ViewHolder(
-            QuestionnaireSelectItemBinding.inflate(
+            AnswerSelectorItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -45,21 +45,12 @@ class QuestionnaireSelectRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]!!
 
-        holder.binding.titleTextView.text = item.title
-
-        holder.binding.root.setOnClickListener {
-
-            val args = MobileNavigationDirections.actionGlobalQuestionnaireAnswerScreen(
-                dayId,
-                item.id
-            )
-            parent.findNavController().navigate(args)
-        }
+        holder.binding.checkBox.text = item.value
     }
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(val binding: QuestionnaireSelectItemBinding) :
+    inner class ViewHolder(val binding: AnswerSelectorItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 
