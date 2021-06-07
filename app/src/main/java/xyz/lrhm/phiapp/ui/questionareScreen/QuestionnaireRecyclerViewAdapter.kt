@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,7 @@ import xyz.lrhm.type.QuestionAnswerType
 
 
 class QuestionnaireRecyclerViewAdapter(
+    val viewModel: QuestionnaireViewModel,
     private val values: List<APIQuery.Question?>,
     private val parent: Fragment,
 
@@ -48,18 +50,29 @@ class QuestionnaireRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]!!
 
-        holder.binding.questionTextView.text = item.question
+        holder.binding.questionTextView.text = "${item.order}." +  " " +  item.question
 
         holder.binding.recyclerView.layoutManager = LinearLayoutManager(
             parent.requireContext()
         )
         if (item.answerType == QuestionAnswerType.OPTIONS)
             holder.binding.recyclerView.adapter = QuestionnaireAnswerRecyclerViewAdapter(
+                item,
+                viewModel,
                 item.options!!, parent
             )
         else{
             holder.binding.recyclerView.visibility = View.GONE
             holder.binding.answerEditText.visibility = View.VISIBLE
+            holder.binding.divider.visibility = View.GONE
+
+            holder.binding.answerEditText.doOnTextChanged { text, start, before, count ->
+
+                viewModel.setAnswerStrForQuestion(
+                    item.id,
+                    text.toString()
+                )
+            }
         }
 //        holder.binding.root.setOnClickListener {
 //

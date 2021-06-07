@@ -10,8 +10,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import xyz.lrhm.phiapp.MainActivity
 import xyz.lrhm.phiapp.R
+import xyz.lrhm.phiapp.databinding.FragmentQuestionareAnswerBinding
 import xyz.lrhm.phiapp.databinding.FragmentQuestionareSelectScreenBinding
 import xyz.lrhm.phiapp.ui.scheduleDayScreen.ExerciseScheduleRecyclerViewAdapter
 import xyz.lrhm.phiapp.ui.scheduleDayScreen.ScheduleDayViewModel
@@ -22,7 +24,7 @@ import xyz.lrhm.phiapp.ui.submitEvaluationScreen.SubmitEvaluationFragmentArgs
 class QuestionnaireAnswerScreen : Fragment() {
 
 
-    lateinit var binding: FragmentQuestionareSelectScreenBinding
+    lateinit var binding: FragmentQuestionareAnswerBinding
     val viewModel: QuestionnaireViewModel by viewModels({ requireActivity() })
     val args by navArgs<QuestionnaireAnswerScreenArgs>()
 
@@ -31,12 +33,14 @@ class QuestionnaireAnswerScreen : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentQuestionareSelectScreenBinding.inflate(inflater, container, false)
+        binding = FragmentQuestionareAnswerBinding.inflate(inflater, container, false)
 
-        binding.helperTextView.visibility = View.GONE
 
         val questionnaire = viewModel.getQuestionnaireForId(args.questionnaireId)
 
+        viewModel.initAnswerMapForQuestionnaire(args.questionnaireId)
+
+        binding.questionCount.text = "${questionnaire.questions!!.size} سوال "
 //        requireActivity().title = questionnaire.title
 
         (requireActivity() as MainActivity).supportActionBar?.title = questionnaire.title
@@ -45,6 +49,7 @@ class QuestionnaireAnswerScreen : Fragment() {
         with(binding.recyclerView) {
             layoutManager = LinearLayoutManager(context)
             adapter = QuestionnaireRecyclerViewAdapter(
+                viewModel,
                 questionnaire.questions!!,
                 this@QuestionnaireAnswerScreen
             )
@@ -58,8 +63,16 @@ class QuestionnaireAnswerScreen : Fragment() {
 //
 //            )
 
+
+
         }
 
+
+        binding.submitEvaluationButton.setOnClickListener {
+
+            Timber.d("Answres are ${viewModel.answers.values}")
+
+        }
         return binding.root
 
     }
