@@ -17,6 +17,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
@@ -34,6 +35,9 @@ class ApolloModule {
         return object : CacheKeyResolver() {
             override fun fromFieldRecordSet(field: ResponseField, recordSet: Map<String, Any>): CacheKey {
                 // Retrieve the id from the object itself
+                if(recordSet.containsKey("uid"))
+                    return CacheKey.from(recordSet["uid"] as String)
+
                 if(recordSet.containsKey("id"))
                     return CacheKey.from(recordSet["id"] as String)
                 return CacheKey.NO_KEY
@@ -44,6 +48,9 @@ class ApolloModule {
                 // In the example, this allows to know that `author(id: "author1")` will retrieve `author1`
                 // That sounds straightforward but without this, the cache would have no way of finding the id before executing the request on the
                 // network which is what we want to avoid
+                if(field.resolveArgument("uid", variables) != null)
+                    return CacheKey.from(field.resolveArgument("uid", variables) as String)
+
                 if(field.resolveArgument("id", variables) != null)
                     return CacheKey.from(field.resolveArgument("id", variables) as String)
                 return CacheKey.NO_KEY

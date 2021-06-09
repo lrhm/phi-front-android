@@ -69,6 +69,7 @@ query API {
           questionareIds
           questionares{
             id
+            uid
             title
             answered
             questions{

@@ -1,0 +1,13 @@
+mutation SubmitQuestionareMutation($submitQuestionareQuestionareAnswerInput: QuestionareAnswerInput) {
+  submitQuestionare(questionareAnswerInput: $submitQuestionareQuestionareAnswerInput) {
+    title
+    answers {
+      questionId
+      answeredOptionId
+      answerStr
+      id
+    }
+    uid
+    answered
+  }
+}

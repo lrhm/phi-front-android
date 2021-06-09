@@ -18,9 +18,12 @@ import timber.log.Timber
 import xyz.lrhm.APIQuery
 import xyz.lrhm.LoginQuery
 import xyz.lrhm.SubmitEvaluationMutation
+import xyz.lrhm.SubmitQuestionareMutation
 import xyz.lrhm.phiapp.core.data.model.ResultOf
 import xyz.lrhm.phiapp.core.util.CacheUtil
 import xyz.lrhm.type.EvaluationInput
+import xyz.lrhm.type.QuestionAnswerInput
+import xyz.lrhm.type.QuestionareAnswerInput
 import java.lang.Exception
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -107,7 +110,37 @@ class RemoteDataSource @Inject constructor(
         return@withContext ResultOf.Success(data)
 
     }
+    suspend fun submitQuestionnaire(input: QuestionareAnswerInput) = withContext(Dispatchers.IO) {
 
+        val token = cacheUtil.getToken()
+
+        val response = try {
+
+            apolloClient.mutate(SubmitQuestionareMutation(input.toInput()))
+                .toBuilder()
+                .requestHeaders(
+                    RequestHeaders.builder().addHeader("Authorization", token).build()
+                ).build()
+                .await()
+        } catch (e: ApolloException) {
+            // handle protocol errors
+
+
+            Timber.e(e)
+
+            return@withContext ResultOf.Error(e)
+        }
+
+        val data = response.data?.submitQuestionare
+        if (data == null || response.hasErrors()) {
+            // handle application errors
+                Timber.d("response is ${response}")
+            Timber.d("${response.errors}")
+            return@withContext ResultOf.Error(Exception("error"))
+        }
+
+        return@withContext ResultOf.Success(data)
+    }
 
     suspend fun submitEvaluation(input: EvaluationInput) = withContext(Dispatchers.IO) {
 

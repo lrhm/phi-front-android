@@ -65,10 +65,12 @@ class QuestionnaireAnswerRecyclerViewAdapter(
                 notifyDataSetChanged()
             } else {
                 viewModel.clearAnswerForOption(
-                    question.id
+                    question.id,
+                    item.id
                 )
 
             }
+
         }
     }
 

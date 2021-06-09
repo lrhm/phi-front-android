@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import xyz.lrhm.phiapp.MainActivity
 import xyz.lrhm.phiapp.R
+import xyz.lrhm.phiapp.core.data.model.ResultOf
 import xyz.lrhm.phiapp.databinding.FragmentQuestionareAnswerBinding
 import xyz.lrhm.phiapp.databinding.FragmentQuestionareSelectScreenBinding
 import xyz.lrhm.phiapp.ui.scheduleDayScreen.ExerciseScheduleRecyclerViewAdapter
@@ -64,14 +67,54 @@ class QuestionnaireAnswerScreen : Fragment() {
 //            )
 
 
-
         }
 
 
         binding.submitEvaluationButton.setOnClickListener {
 
-            Timber.d("Answres are ${viewModel.answers.values}")
+            Timber.d("Answres are , ${viewModel.isAllAnswered()}")
 
+            if (viewModel.isAllAnswered().not()) {
+                binding.errorTextView.text = "اطلاعات کامل نیست، لطفا مقادیر را انتخواب کنید"
+
+            } else {
+                binding.errorTextView.text = ""
+                viewModel.sendQuestionnaireAnswer(
+                    args.dayId,
+                    args.questionnaireId
+                )
+                binding.submitEvaluationButton.startAnimation()
+
+            }
+
+
+        }
+
+        viewModel.result.observe(viewLifecycleOwner){
+
+            Timber.d("result is ${it}")
+            if (it is ResultOf.Error) {
+                binding.errorTextView.text = "خطا رخ داده است، از اتصال به اینترنت مطمئن شوید."
+                binding.submitEvaluationButton.revertAnimation {
+
+                }
+
+            }
+            else{
+                binding.submitEvaluationButton.revertAnimation {
+                    binding.submitEvaluationButton.text = "ارسال شد"
+
+                    val drawable = ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.submit_btn_drawable
+                    )!!
+                    val color = ContextCompat.getColor(requireContext(), R.color.success)
+                    DrawableCompat.setTint(drawable, color)
+
+                    binding.submitEvaluationButton.background = drawable
+
+                }
+            }
         }
         return binding.root
 
