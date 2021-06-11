@@ -128,9 +128,10 @@ class ScheduleDayFragment : Fragment() {
         val questionares = viewModel.getQuestionnairesForDayId(day.id)
 
         Timber.d("questionares are ${questionares}")
-        if(questionares.isEmpty()){
+        if (questionares.isEmpty() || (questionares?.map { it!!.answered!! }
+                ?.reduce { acc, b -> b && acc } == true)) {
             binding.evalutioanButton.visibility = View.GONE
-        }else{
+        } else {
             binding.evalutioanButton.visibility = View.VISIBLE
 
             binding.evalutioanButton.setOnClickListener {

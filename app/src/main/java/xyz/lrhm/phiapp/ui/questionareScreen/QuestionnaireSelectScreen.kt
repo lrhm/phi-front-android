@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,18 +39,32 @@ class QuestionnaireSelectScreen : Fragment() {
         with(binding.recyclerView) {
             layoutManager = LinearLayoutManager(context)
 
-            val list = viewModel.getQuestionnairesForDayId(args.dayId)
+            val list = viewModel.getQuestionnairesForDayId(args.dayId).filter { it?.answered == false }
 
             adapter = QuestionnaireSelectRecyclerViewAdapter(
                 args.dayId,
                 list,
-             this@QuestionnaireSelectScreen,
+                this@QuestionnaireSelectScreen,
 
-            )
+                )
 
         }
 
         return binding.root
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        try {
+            if (viewModel.questionnaires.value?.map { it!!.answered!! }
+                    ?.reduce { acc, b -> b && acc } == true)
+                findNavController().navigateUp()
+
+        } catch (e: Exception) {
+
+        }
 
     }
 

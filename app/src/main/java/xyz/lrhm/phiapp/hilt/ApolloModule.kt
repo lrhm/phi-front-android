@@ -26,7 +26,7 @@ class ApolloModule {
 
 //    private val url = "http://195.211.44.105:4000"
 
-    private val url = "http://192.168.2.6:4000"
+    private val url = "https://tele-physio.ir/graphql"
 
     @Provides
     @Singleton
