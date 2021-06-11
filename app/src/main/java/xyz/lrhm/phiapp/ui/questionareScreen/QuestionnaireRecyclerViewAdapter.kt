@@ -50,7 +50,7 @@ class QuestionnaireRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]!!
 
-        holder.binding.questionTextView.text = "${item.order}." +  " " +  item.question
+        holder.binding.questionTextView.text = "${item.order+1}." +  " " +  item.question
 
         holder.binding.recyclerView.layoutManager = LinearLayoutManager(
             parent.requireContext()
